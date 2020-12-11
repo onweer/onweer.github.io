@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>TypeScript（一）</title>
+    <link href="/2020/10/09/TypeScript%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
+    <url>/2020/10/09/TypeScript%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>typescript4.0</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>待Graphql-shield（权限）</title>
+    <link href="/2020/09/29/%E5%BE%85Graphql-shield%EF%BC%88%E6%9D%83%E9%99%90%EF%BC%89/"/>
+    <url>/2020/09/29/%E5%BE%85Graphql-shield%EF%BC%88%E6%9D%83%E9%99%90%EF%BC%89/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>待Graphql-mesh</title>
+    <link href="/2020/09/27/%E5%BE%85Graphql-mesh/"/>
+    <url>/2020/09/27/%E5%BE%85Graphql-mesh/</url>
+    
+    <content type="html"><![CDATA[<p>GraphQL Mesh允许您使用GraphQL查询语言来访问不运行GraphQL（也可以运行GraphQL的远程API）中的数据。它可以用作其他服务的网关，也可以作为本地GraphQL模式运行，以聚合来自远程API的数据。</p><p>GraphQL Mesh的目标是简化对数据源的访问，并使用GraphQL语言轻松查询它。您可以链接，合并，聚合，转换，修改和链接数据源，然后使用GraphQL查询对其进行查询。</p><p>您可以使用我们编写的处理程序之一（GraphQL，Apollo Federation，gRPC，Swagger，OpenAPI，SOAP，Postgres等），也可以编写自己的处理程序来访问数据。</p><p>GraphQL Mesh的工作方式是：</p><p>从服务收集API模式规范<br>为服务创建全类型SDK的运行时实例。<br>将API规范转换为GraphQL模式<br>应用自定义架构转换和架构扩展<br>创建全类型的单一架构GraphQL SDK，以从服务中获取数据。</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>GraphQL官方规范</title>
+    <link href="/2020/09/25/GraphQL%E5%AE%98%E6%96%B9%E8%A7%84%E8%8C%83/"/>
+    <url>/2020/09/25/GraphQL%E5%AE%98%E6%96%B9%E8%A7%84%E8%8C%83/</url>
+    
+    <content type="html"><![CDATA[<h1 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h1><p>GraphQL 是一个用于 API 的查询语言，是一个使用基于类型系统来执行查询的服务端运行时（类型系统由你的数据定义）。GraphQL 并没有和任何特定数据库或者存储引擎绑定，而是依靠你现有的代码和数据支撑。</p><p>一个 GraphQL 服务是通过定义类型和类型上的字段来创建的，然后给每个类型上的每个字段提供解析函数。例如，一个 GraphQL 服务告诉我们当前登录用户是 me，这个用户的名称可能像这样：</p><pre><code class="hljs js">type Query &#123;  me: User&#125;type User &#123;  id: ID  name: <span class="hljs-built_in">String</span>&#125;</code></pre><p>一并的还有每个类型上字段的解析函数：</p><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Query_me</span>(<span class="hljs-params">request</span>) </span>&#123;  <span class="hljs-keyword">return</span> request.auth.user;&#125;<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">User_name</span>(<span class="hljs-params">user</span>) </span>&#123;  <span class="hljs-keyword">return</span> user.getName();&#125;</code></pre><p>一旦一个 GraphQL 服务运行起来（通常在 web 服务的一个 URL 上），它就能接收 GraphQL 查询，并验证和执行。接收到的查询首先会被检查确保它只引用了已定义的类型和字段，然后运行指定的解析函数来生成结果。</p><p>例如这个查询：</p><pre><code class="hljs js">&#123;  me &#123;    name  &#125;&#125;</code></pre><p>会产生这样的JSON结果：</p><pre><code class="hljs js">&#123;  <span class="hljs-string">&quot;me&quot;</span>: &#123;    <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Luke Skywalker&quot;</span>  &#125;&#125;</code></pre><h1 id="字段（Fields）"><a href="#字段（Fields）" class="headerlink" title="字段（Fields）"></a>字段（Fields）</h1><p>简单而言，Fields 是关于请求对象上的特定字段。我们以一个非常简单的查询以及其结果为例：</p><pre><code class="hljs js">&#123;  hero &#123;    name  &#125;&#125;&#123;  <span class="hljs-string">&quot;data&quot;</span>: &#123;    <span class="hljs-string">&quot;hero&quot;</span>: &#123;      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;R2-D2&quot;</span>    &#125;  &#125;&#125;</code></pre><p>你立即就能发现，查询和其结果拥有几乎一样的结构。这是 GraphQL 最重要的特性，因<br>为这样一来，你就总是能得到你想要的数据，而服务器也准确地知道客户端请求的字段</p><hr><h2 id="对象类型查询"><a href="#对象类型查询" class="headerlink" title="对象类型查询"></a>对象类型查询</h2><p>在前一例子中，我们请求了我们主角的名字，返回了一个字符串类型（String），但是字段也能指代对象类型（Object）。这个时候，你可以对这个对象的字段进行次级选择（sub-selection）。GraphQL 查询能够遍历相关对象及其字段，使得客户端可以一次请求查询大量相关数据，而不像传统 REST 架构中那样需要多次往返查询。</p><pre><code class="hljs js">&#123;  hero &#123;    name    # 查询可以有备注！    friends &#123;      name    &#125;  &#125;&#125;&#123;  <span class="hljs-string">&quot;data&quot;</span>: &#123;    <span class="hljs-string">&quot;hero&quot;</span>: &#123;      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;R2-D2&quot;</span>,      <span class="hljs-string">&quot;friends&quot;</span>: [        &#123;          <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Luke Skywalker&quot;</span>        &#125;,        &#123;          <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Han Solo&quot;</span>        &#125;,        &#123;          <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Leia Organa&quot;</span>        &#125;      ]    &#125;  &#125;&#125;</code></pre><p>注意这个例子中，friends 返回了一个数组的项目，GraphQL 查询会同等看待单个项目或者一个列表的项目，然而我们可以通过 schema 所指示的内容来预测将会得到哪一种。</p><h1 id="参数（Arguments）"><a href="#参数（Arguments）" class="headerlink" title="参数（Arguments）"></a>参数（Arguments）</h1><p>即使我们能做的仅仅是遍历对象及其字段，GraphQL 就已经是一个非常有用的数据查询语言了。但是当你加入给字段传递参数的能力时，事情会变得更加有趣。</p><pre><code class="hljs ts">&#123;  human(id: <span class="hljs-string">&quot;1000&quot;</span>) &#123;    name    height  &#125;&#125;&#123;  <span class="hljs-string">&quot;data&quot;</span>: &#123;    <span class="hljs-string">&quot;human&quot;</span>: &#123;      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Luke Skywalker&quot;</span>,      <span class="hljs-string">&quot;height&quot;</span>: <span class="hljs-number">1.72</span>    &#125;  &#125;&#125;</code></pre><p>在类似 REST 的系统中，你只能传递一组简单参数 —— 请求中的 query 参数和 URL 段。但是在 GraphQL 中，每一个字段和嵌套对象都能有自己的一组参数，从而使得 GraphQL 可以完美替代多次 API 获取请求。甚至你也可以给 标量（scalar）字段传递参数，用于实现服务端的一次转换，而不用每个客户端分别转换。</p><pre><code class="hljs js">&#123;  human(id: <span class="hljs-string">&quot;1000&quot;</span>) &#123;    name    height(unit: FOOT)  &#125;&#125;&#123;  <span class="hljs-string">&quot;data&quot;</span>: &#123;    <span class="hljs-string">&quot;human&quot;</span>: &#123;      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Luke Skywalker&quot;</span>,      <span class="hljs-string">&quot;height&quot;</span>: <span class="hljs-number">5.6430448</span>    &#125;  &#125;&#125;</code></pre><p>参数可以是多种不同的类型。上面例子中，我们使用了一个枚举类型，其代表了一个有限选项集合（本例中为长度单位，即是 METER 或者 FOOT）。GraphQL 自带一套默认类型，但是 GraphQL 服务器可以声明一套自己的定制类型，只要能序列化成你的传输格式即可。</p><p><a href="https://graphql.cn/learn/schema">更多的 GraphQL 类型系统</a></p><h1 id="别名（Aliases）"><a href="#别名（Aliases）" class="headerlink" title="别名（Aliases）"></a>别名（Aliases）</h1><p>如果你眼睛够锐利，你可能已经发现，即便结果中的字段与查询中的字段能够匹配，但是因为他们并不包含参数，你就没法通过不同参数来查询相同字段。这便是为何你需要别名 —— 这可以让你重命名结果中的字段为任意你想到的名字。</p><pre><code class="hljs clojure">&#123;  empireHero: hero(<span class="hljs-name">episode:</span> EMPIRE) &#123;    name  &#125;  jediHero: hero(<span class="hljs-name">episode:</span> JEDI) &#123;    name  &#125;&#125;&#123;  <span class="hljs-string">&quot;data&quot;</span>: &#123;    <span class="hljs-string">&quot;empireHero&quot;</span>: &#123;      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Luke Skywalker&quot;</span>    &#125;,    <span class="hljs-string">&quot;jediHero&quot;</span>: &#123;      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;R2-D2&quot;</span>    &#125;  &#125;&#125;&#123;  <span class="hljs-string">&quot;data&quot;</span>: &#123;    <span class="hljs-string">&quot;empireHero&quot;</span>: &#123;      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Luke Skywalker&quot;</span>    &#125;,    <span class="hljs-string">&quot;jediHero&quot;</span>: &#123;      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;R2-D2&quot;</span>    &#125;  &#125;&#125;</code></pre><h1 id="片段（Fragments）"><a href="#片段（Fragments）" class="headerlink" title="片段（Fragments）"></a>片段（Fragments）</h1><p>假设我们的 app 有比较复杂的页面，将正反派主角及其友军分为两拨。你立马就能想到对应的查询会变得复杂，因为我们需要将一些字段重复至少一次 —— 两方各一次以作比较。</p><p>这就是为何 GraphQL 包含了称作片段的<strong>可复用单元</strong>。片段使你能够组织一组字段，然后在需要它们的的地方引入。下面例子展示了如何使用片段解决上述场景：</p><h1 id="操作类型"><a href="#操作类型" class="headerlink" title="操作类型"></a>操作类型</h1><p>query、mutation、subscription</p><h1 id="操作名称（Operation-name）"><a href="#操作名称（Operation-name）" class="headerlink" title="操作名称（Operation name）"></a>操作名称（Operation name）</h1><h1 id="变量（Variables）"><a href="#变量（Variables）" class="headerlink" title="变量（Variables）"></a>变量（Variables）</h1><h2 id="变量定义"><a href="#变量定义" class="headerlink" title="变量定义"></a>变量定义</h2><p>变量定义看上去像是上述查询中的 ($episode: Episode)。其工作方式跟类型语言中函数的参数定义一样。它以列出所有变量，变量前缀必须为 $，后跟其类型，本例中为 Episode。</p><h2 id="默认变量"><a href="#默认变量" class="headerlink" title="默认变量"></a>默认变量</h2><p>可以通过在查询中的类型定义后面附带默认值的方式，将默认值赋给变量。</p><h1 id="指令（Directives）"><a href="#指令（Directives）" class="headerlink" title="指令（Directives）"></a>指令（Directives）</h1><p>@include(if: Boolean)<br>@skip(if: Boolean)</p><h1 id="变更（Mutations"><a href="#变更（Mutations" class="headerlink" title="变更（Mutations)"></a>变更（Mutations)</h1><p>GraphQL 的大部分讨论集中在数据获取，但是任何完整的数据平台也都需要一个改变服务端数据的方法。</p><p>REST 中，任何请求都可能最后导致一些服务端副作用，但是约定上建议不要使用 GET 请求来修改数据。GraphQL 也是类似 —— 技术上而言，任何查询都可以被实现为导致数据写入。然而，建一个约定来规范任何导致写入的操作都应该显式通过变更（mutation）来发送。</p><p>变更中的多个字段（Multiple fields in mutations）<br>一个变更也能包含多个字段，一如查询。查询和变更之间名称之外的一个重要区别是：</p><p>查询字段时，是并行执行，而变更字段时，是线性执行，一个接着一个。</p><p><strong>这意味着如果我们一个请求中发送了两个 incrementCredits 变更，第一个保证在第二个之前执行，以确保我们不会出现竞态。</strong></p><h1 id="内联片段"><a href="#内联片段" class="headerlink" title="内联片段"></a>内联片段</h1><h1 id="元字段（Meta-fields）"><a href="#元字段（Meta-fields）" class="headerlink" title="元字段（Meta fields）"></a>元字段（Meta fields）</h1>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>graphql</tag>
+      
+      <tag>api</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>插件化企业级前端框架UmiJS</title>
+    <link href="/2020/09/20/%E6%8F%92%E4%BB%B6%E5%8C%96%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6UmiJS/"/>
+    <url>/2020/09/20/%E6%8F%92%E4%BB%B6%E5%8C%96%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6UmiJS/</url>
+    
+    <content type="html"><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><ul><li><p>可扩展<br>Umi 实现了完整的生命周期，并使其插件化，Umi 内部功能也全由插件完成。此外还支持插件和插件集，以满足功能和垂直域的分层需求。</p></li><li><p>开箱即用<br>Umi 内置了路由、构建、部署、测试等，仅需一个依赖即可上手开发。并且还提供针对 React 的集成插件集，内涵丰富的功能，可满足日常 80% 的开发需求。</p></li><li><p>企业级<br>经蚂蚁内部 3000+ 项目以及阿里、优酷、网易、飞猪、口碑等公司项目的验证，值得信赖。</p></li><li><p>大量自研<br>包含微前端、组件打包、文档工具、请求库、hooks 库、数据流等，满足日常项目的周边需求。</p></li><li><p>完备路由<br>同时支持配置式路由和约定式路由，同时保持功能的完备性，比如动态路由、嵌套路由、权限路由等等。</p></li><li><p>面向未来<br>在满足需求的同时，我们也不会停止对新技术的探索。比如 modern mode、webpack@5、自动化 external、bundler less 等等。</p></li></ul>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>前端</tag>
+      
+      <tag>umijs</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>腾讯云服务功能大全2020</title>
+    <link href="/2020/09/16/%E8%85%BE%E8%AE%AF%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%8A%9F%E8%83%BD%E5%A4%A7%E5%85%A82020/"/>
+    <url>/2020/09/16/%E8%85%BE%E8%AE%AF%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%8A%9F%E8%83%BD%E5%A4%A7%E5%85%A82020/</url>
+    
+    <content type="html"><![CDATA[<h1 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h1><h2 id="云计算服务器（Cloud-Virtual-Machine，CVM）"><a href="#云计算服务器（Cloud-Virtual-Machine，CVM）" class="headerlink" title="云计算服务器（Cloud Virtual Machine，CVM）"></a>云计算服务器（Cloud Virtual Machine，CVM）</h2><ul><li>虚拟机，自由度高，需要自行安装环境，硬件规格自定义</li><li>网络： 10.0.0.0 - 10.255.255.255、172.16.0.0 - 172.31.255.255、192.168.0.0 - 192.168.255.255</li><li>安全： SSH密钥、VPC私有网络、安全组、弹性公网IP（EIP）、弹性网卡（ENI）</li><li>地域: 地域（Region）是指物理的数据中心的地理区域。腾讯云不同地域之间完全隔离，保证不同地域间最大程度的稳定性和容错性。为了降低访问时延、提高下载速度，建议您选择最靠近您客户的地域。不同地域之间的网络完全隔离，不同地域之间的云产品默认不能通过内网通信。</li><li>可用区: 处于相同地域不同可用区，但在同一个私有网络下的云产品之间均通过内网互通，可以直接使用 内网 IP 访问。</li><li>跨可用区容灾: 同一区域不同可用区相互隔离</li><li>快照: 硬盘备份，可恢复，可副本，定期快照</li><li>存储: 云硬盘LVM、数据盘、对象存储COS、RAID</li><li>镜像: 云服务器的装机盘</li><li>镜像应用: 部署特定软件环境</li><li>自定义镜像： 批量部署系统</li><li>监控告警</li><li>访问管理</li></ul><h2 id="轻量应用服务器Lighthouse"><a href="#轻量应用服务器Lighthouse" class="headerlink" title="轻量应用服务器Lighthouse"></a>轻量应用服务器Lighthouse</h2><p>轻量应用服务器 Lighthouse 简介</p><p>轻量应用服务器（Lighthouse）是一种易于使用和管理、适合承载轻量级业务负载的云服务器，能帮助中小企业及开发者在云端快速构建网站、博客、电商、论坛等各类应用以及开发测试环境，并提供应用部署、配置和管理的全流程一站式服务，极大提升构建应用的体验，是您使用腾讯云的最佳入门途径。 </p><p>这个类似一站搭建，适用于不熟悉网站部署的人</p><h2 id="弹性伸缩AS-Auto-Scaling"><a href="#弹性伸缩AS-Auto-Scaling" class="headerlink" title="弹性伸缩AS Auto Scaling"></a>弹性伸缩AS Auto Scaling</h2><p>自动化、具备计划性、高效且高容错性的低成本计算资源管理策略</p><p>您可设定时间周期性地执行管理策略或创建实时监控策略，来管理 CVM 实例数量，并完成对实例的环境部署，保证业务平稳顺利运行。在需求高峰时，弹性伸缩自动增加 CVM 实例数量，以保证性能不受影响；当需求较低时，则会减少 CVM 实例数量以降低成本。弹性伸缩策略不仅能够让需求稳定规律的应用程序实现自动化管理，同时告别业务突增或CC攻击等带来的烦恼，对于每天、每周、每月使用量不停波动的应用程序还能够根据业务负载分钟级扩展。弹性伸缩策略让集群保持恰到好处的实例数量。</p><h2 id="批量计算"><a href="#批量计算" class="headerlink" title="批量计算"></a>批量计算</h2><ul><li>应用场景：科学研究、电影渲染…</li></ul><h2 id="ECM边缘计算"><a href="#ECM边缘计算" class="headerlink" title="ECM边缘计算"></a>ECM边缘计算</h2><ul><li>应用场景：云游戏，边缘AI，实时音视频</li></ul><h1 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h1><h2 id="COS-对象存储"><a href="#COS-对象存储" class="headerlink" title="COS 对象存储"></a>COS 对象存储</h2><p>读写的用户是计算机</p><p>对象存储 COS 简介<br>对象存储（Cloud Object Storage，COS）是由腾讯云推出的无目录层次结构、无数据格式限制，可容纳海量数据且支持 HTTP/HTTPS 协议访问的分布式存储服务</p><ul><li>标准存储</li><li>低频存储</li><li>归档存储</li></ul><h2 id="CFS-文件存储"><a href="#CFS-文件存储" class="headerlink" title="CFS 文件存储"></a>CFS 文件存储</h2><p>读写的用户是人</p><h2 id="块存储"><a href="#块存储" class="headerlink" title="块存储"></a>块存储</h2><p>机器设备用的，具有排它性，一个设备访问后，其它设备不能访问了</p><h2 id="HDFS-分布式存储"><a href="#HDFS-分布式存储" class="headerlink" title="HDFS 分布式存储"></a>HDFS 分布式存储</h2><p>提供标准 HDFS 访问协议和分层命名空间的高性能分布式文件系统</p><p>应用场景：大数据分析</p><h2 id="存储网关-CSG"><a href="#存储网关-CSG" class="headerlink" title="存储网关 CSG"></a>存储网关 CSG</h2><h2 id="日志服务-CLS"><a href="#日志服务-CLS" class="headerlink" title="日志服务 CLS"></a>日志服务 CLS</h2><p>应用场景：后台运维管理，终端用户行为分析，日志审计</p><p>日志服务（Cloud Log Service，CLS）是腾讯云提供的一站式日志服务平台，提供了从日志采集、日志存储到日志检索分析、实时消费、日志投递等多项服务，协助用户通过日志来解决业务运营、安全监控、日志审计、日志分析等问题。用户无需关注资源扩容问题，五分钟便捷接入，即可享受稳定可靠的日志服务。</p><h1 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h1><h2 id="负载均衡-CLB"><a href="#负载均衡-CLB" class="headerlink" title="负载均衡 CLB"></a>负载均衡 CLB</h2><p>就是反向代理，做转发<br>CVM和TKE的服务都可以接入</p><h2 id="私有网络-VPC"><a href="#私有网络-VPC" class="headerlink" title="私有网络 VPC"></a>私有网络 VPC</h2><p>实现 IP 地址、子网、路由表、网络 ACL 、流日志等功能的配置管理</p><h2 id="专线接入-DC"><a href="#专线接入-DC" class="headerlink" title="专线接入 DC"></a>专线接入 DC</h2><p>快速、安全、稳定、低时延的光纤通信专用网络</p><h2 id="弹性公网IP"><a href="#弹性公网IP" class="headerlink" title="弹性公网IP"></a>弹性公网IP</h2><p>容器<br>Serverless<br>CDN与加速</p><h1 id="域名-备案"><a href="#域名-备案" class="headerlink" title="域名/备案"></a>域名/备案</h1><h1 id="Sass"><a href="#Sass" class="headerlink" title="Sass"></a>Sass</h1><p>数据库<br>中间价<br>云通信<br>金融服务<br>视频服务</p><h1 id="AI"><a href="#AI" class="headerlink" title="AI"></a>AI</h1><p>人脸识别<br>文字识别<br>图像识别</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>腾讯云</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>腾讯云TKE容器服务使用</title>
+    <link href="/2020/09/16/%E8%85%BE%E8%AE%AF%E4%BA%91TKE%E5%AE%B9%E5%99%A8%E6%9C%8D%E5%8A%A1%E4%BD%BF%E7%94%A8/"/>
+    <url>/2020/09/16/%E8%85%BE%E8%AE%AF%E4%BA%91TKE%E5%AE%B9%E5%99%A8%E6%9C%8D%E5%8A%A1%E4%BD%BF%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<h1 id="产品介绍"><a href="#产品介绍" class="headerlink" title="产品介绍"></a>产品介绍</h1><p>腾讯云容器服务（Tencent Kubernetes Engine，TKE）是高度可扩展的高性能容器管理服务，您可以在托管的云服务器实例集群上轻松运行应用程序。使用该服务，您将无需安装、运维、扩展您的集群管理基础设施，只需进行简单的 API 调用，便可启动和停止 Docker 应用程序，查询集群的完整状态，以及使用各种云服务。您可以根据资源需求和可用性要求在集群中安排容器的置放，满足业务或应用程序的特定要求。</p><h1 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h1><p>使用腾讯云容器服务，会涉及到以下基本概念：</p><ul><li><strong>集群</strong>：是指容器运行所需云资源的集合，包含了若干台云服务器、负载均衡器等云资源。</li><li><strong>实例（Pod）</strong>：由相关的一个或多个容器构成一个实例，这些容器共享相同的存储和网络空间。</li><li><strong>工作负载</strong>：Kubernetes 资源对象，用于管理 Pod 副本的创建、调度以及整个生命周期的自动控制。</li><li><strong>Service</strong>：由多个相同配置的实例（Pod）和访问这些实例（Pod）的规则组成的微服务。</li><li><strong>Ingress</strong>：Ingress 是用于将外部 HTTP（S）流量路由到服务（Service）的规则集合。</li><li><strong>Helm 应用</strong>：Helm 是管理 Kubernetes 应用程序的打包工具，提供了 Helm Chart 在指定集群内图形化的增删改查。</li><li><strong>镜像仓库</strong>：用于存放 Docker 镜像，Docker 镜像用于部署容器服务。</li></ul><h1 id="名次对照"><a href="#名次对照" class="headerlink" title="名次对照"></a>名次对照</h1><p>本文主要进行腾讯云容器服务 TKE 与原生 Kubernetes 名词对照。如下表：</p><table><thead><tr><th width="50%">容器服务 TKE</th><th width="50%">原生 Kubernetes</th></tr></thead><tbody><tr><td>集群</td><td>Cluster</td></tr><tr><td>节点</td><td>Node</td></tr><tr><td>节点池</td><td>NodePool</td></tr><tr><td>容器</td><td>Container</td></tr><tr><td>镜像</td><td>Image</td></tr><tr><td>实例</td><td>Pod</td></tr><tr><td>命名空间</td><td>Namespace</td></tr><tr><td>无状态工作负载</td><td>Deployment</td></tr><tr><td>有状态工作负载</td><td>StatefulSet</td></tr><tr><td>任务</td><td>Job</td></tr><tr><td>定时任务</td><td>CronJob</td></tr><tr><td>服务</td><td>Service</td></tr><tr><td>路由</td><td>Ingress</td></tr><tr><td>标签</td><td>Label</td></tr><tr><td>配置项</td><td>Configmap</td></tr><tr><td>密钥</td><td>Secret</td></tr><tr><td>卷</td><td>Volume</td></tr><tr><td>PV</td><td>PersistentVolume</td></tr><tr><td>PVC</td><td>PersistentVolumeClaim</td></tr><tr><td>自动伸缩</td><td>HPA</td></tr><tr><td>虚拟集群 IP</td><td>Cluster IP</td></tr><tr><td>节点端口</td><td>NodePort</td></tr><tr><td>负载均衡</td><td>LoadBalancer</td></tr><tr><td>节点亲和性</td><td>NodeAffinity</td></tr><tr><td>应用亲和性</td><td>PodAffinity</td></tr><tr><td>应用非亲和性</td><td>PodAntiAffinity</td></tr><tr><td>选择器</td><td>LabelSelector</td></tr><tr><td>注解</td><td>Annotation</td></tr><tr><td>触发器</td><td>Webhook</td></tr><tr><td>端点</td><td>Endpoint</td></tr><tr><td>资源配额</td><td>Resource Quota</td></tr><tr><td>资源限制</td><td>Limit Range</td></tr><tr><td>模板</td><td>Template</td></tr></tbody></table>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>腾讯云</tag>
+      
+      <tag>容器服务</tag>
+      
+      <tag>Cloud</tag>
+      
+      <tag>Kubernetes</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>nest上升最快的Node框架</title>
+    <link href="/2020/09/14/nest%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <url>/2020/09/14/nest%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    
+    <content type="html"><![CDATA[<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ul><li>完美支持 Typescript</li><li>面向 AOP 编程</li><li>支持 Typeorm</li><li>高并发，异步非阻塞 IO</li><li>Node.js 版的 spring</li><li>构建微服务应用</li><li>渐进式开发</li></ul><h2 id="平台无关"><a href="#平台无关" class="headerlink" title="平台无关"></a>平台无关</h2><p>Nest 旨在成为一个与平台无关的框架，在底层，Nest使用强大的 HTTP Server 框架，如 Express（默认）和 Fastify。Nest 在这些框架之上提供了一定程度的抽象，同时也将其 API 直接暴露给开发人员。这样可以轻松使用每个平台的无数第三方模块。</p><h2 id="框架的思考"><a href="#框架的思考" class="headerlink" title="框架的思考"></a>框架的思考</h2><p>近年来，感谢 Node.js，JavaScript 已成为前端和后端应用程序的网络“通用语言”。这产生了令人敬畏的项目，如 Angular，React 和 Vue，它们提高了开发人员的工作效率，并能够构建快速，可测试和可扩展的前端应用程序。然而，虽然 Node（和服务器端 JavaScript ）存在大量优秀的库，帮助器和工具，但它们都没有有效地解决主要问题 - 架构。<br>Nest 提供了一个开箱即用的应用程序架构，允许开发人员和团队创建<strong>高度可测试，可扩展，松散耦合且易于维护的应用程序。</strong></p><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code class="hljs bash">$ npm i -g @nestjs/cli$ nest new project-name</code></pre><h2 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h2><p><a href="https://docs.nestjs.cn/7/firststeps?id=%E7%AC%AC%E4%B8%80%E6%AD%A5">参考文档</a></p><h3 id="使用装饰器Controller"><a href="#使用装饰器Controller" class="headerlink" title="使用装饰器Controller"></a>使用装饰器Controller</h3><p>控制器负责处理传入的请求和定义数据如何返回</p><pre><code class="hljs ts"><span class="hljs-keyword">import</span> &#123; Controller, Get &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/common&#x27;</span>;<span class="hljs-keyword">import</span> &#123; AppService &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./app.service&#x27;</span>;<span class="hljs-meta">@Controller</span>()<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> AppController &#123;  <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> appService: AppService</span>) &#123;&#125;  <span class="hljs-meta">@Get</span>()  getHello(): <span class="hljs-built_in">string</span> &#123;    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.appService.getHello();  &#125;&#125;</code></pre><h3 id="数据Service"><a href="#数据Service" class="headerlink" title="数据Service"></a>数据Service</h3><pre><code class="hljs ts"><span class="hljs-keyword">import</span> &#123; Injectable &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/common&#x27;</span>;<span class="hljs-meta">@Injectable</span>()<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> AppService &#123;  getHello(): <span class="hljs-built_in">string</span> &#123;    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Hello World!&#x27;</span>;  &#125;&#125;</code></pre><h2 id="使用express返回数据"><a href="#使用express返回数据" class="headerlink" title="使用express返回数据"></a>使用express返回数据</h2><pre><code class="hljs ts"><span class="hljs-keyword">import</span> &#123; Controller, Get, Req &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/common&#x27;</span>;<span class="hljs-keyword">import</span> &#123; Request &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;express&#x27;</span>;<span class="hljs-meta">@Controller</span>(<span class="hljs-string">&#x27;cats&#x27;</span>)<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> CatsController &#123;    <span class="hljs-meta">@Get</span>()    findAll(<span class="hljs-meta">@Req</span>() request: Request): <span class="hljs-built_in">string</span> &#123;        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;this action returns all cats.&#x27;</span>    &#125;&#125;</code></pre><p>装饰器与普通函数对比</p><p>||<del>head1||</del>head2||<br>||<code>@Request()</code>||<code>req</code>||<br>||<code>@Response() @Res()*</code>||<code>res</code>||<br>||<code>@Next()</code>||<code>next</code>||<br>||<code>@Session()</code>||<code>req.session</code>||<br>||<code>@Param(key?: string)</code>||<code>req.params</code>  /  <code>req.params[key]</code>||<br>||<code>@Body(key?: string)</code>||<code>req.body</code>  /  <code>req.body[key]</code>||<br>||<code>@Query(key?: string)</code>||<code>req.query</code>  /  <code>req.query[key]</code>||<br>||<code>@Headers(name?: string)</code>||<code>req.headers</code>  /  <code>req.headers[name]</code>||<br>||<code>@Ip()</code>||<code>req.ip</code>||</p><h2 id="引入Services层"><a href="#引入Services层" class="headerlink" title="引入Services层"></a>引入Services层</h2><pre><code class="hljs ts"><span class="hljs-comment">// interface</span><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> Cat &#123;    name: <span class="hljs-built_in">string</span>;    age: <span class="hljs-built_in">number</span>;    breed: <span class="hljs-built_in">string</span>;&#125;</code></pre><pre><code class="hljs ts"><span class="hljs-comment">// services</span><span class="hljs-keyword">import</span> &#123; Injectable &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/common&#x27;</span>;<span class="hljs-keyword">import</span> &#123; Cat &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./cats.interface&#x27;</span>;<span class="hljs-meta">@Injectable</span>()<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> CatsService &#123;    <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> cats: Cat[] = []    create(cat: Cat) &#123;        <span class="hljs-built_in">this</span>.cats.push(cat)    &#125;    findAll(): Cat[] &#123;        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.cats    &#125;&#125;</code></pre><pre><code class="hljs ts"><span class="hljs-comment">// Controlloer</span><span class="hljs-keyword">import</span> &#123; Body, Controller, Get, Param, Post, Req &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/common&#x27;</span><span class="hljs-keyword">import</span> &#123; Request &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;express&#x27;</span><span class="hljs-keyword">import</span> &#123; CreateCatDto &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./create-cat.dto&#x27;</span><span class="hljs-keyword">import</span> &#123; CatsService &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./cats.service&#x27;</span><span class="hljs-keyword">import</span> &#123; Cat &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./cats.interface&#x27;</span><span class="hljs-meta">@Controller</span>(<span class="hljs-string">&#x27;cats&#x27;</span>)<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> CatsController &#123;  <span class="hljs-keyword">constructor</span> (<span class="hljs-params"><span class="hljs-keyword">private</span> catsServices: CatsService</span>) &#123;&#125;  <span class="hljs-meta">@Get</span>()  <span class="hljs-keyword">async</span> findAll (): <span class="hljs-built_in">Promise</span>&amp;lt;Cat[]&amp;gt; &#123;    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.catsServices.findAll()  &#125;  <span class="hljs-meta">@Post</span>()  <span class="hljs-keyword">async</span> create (<span class="hljs-meta">@Body</span>() CreateCatDto: CreateCatDto) &#123;    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.catsServices.create(CreateCatDto)  &#125;&#125;</code></pre>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>node</tag>
+      
+      <tag>nest</tag>
+      
+      <tag>后端</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>fastify（一）体验</title>
+    <link href="/2020/09/10/fastify%EF%BC%88%E4%B8%80%EF%BC%89%E4%BD%93%E9%AA%8C/"/>
+    <url>/2020/09/10/fastify%EF%BC%88%E4%B8%80%EF%BC%89%E4%BD%93%E9%AA%8C/</url>
+    
+    <content type="html"><![CDATA[<h1 id="fastify-核心功能"><a href="#fastify-核心功能" class="headerlink" title="fastify 核心功能"></a>fastify 核心功能</h1><p>以下列出的是 Fastify 已经实现的主要功能及原理：</p><ul><li>高性能： 据我们所知，Fastify 是这一领域中最快的 web 框架之一，另外，取决于代码的复杂性，Fastify 最多可以处理每秒 3 万次的请求。</li><li>可扩展： Fastify 通过其提供的钩子（hook）、插件和装饰器（decorator）提供完整的可扩展性。</li><li>基于 Schema： 即使这不是强制性的，我们仍建议使用 JSON Schema 来做路由（route）验证及输出内容的序列化，Fastify 在内部将 schema 编译为高效的函数并执行。</li><li>日志： 日志是非常重要且代价高昂的。我们选择了最好的日志记录程序来尽量消除这一成本，这就是 Pino!</li><li>对开发人员友好： 框架的使用很友好，帮助开发人员处理日常工作，并且不牺牲性能和安全性。</li><li>支持 TypeScript ： 我们努力维护一个 TypeScript 类型声明文件，以便支持不断增长的 TypeScript 社区。</li><li>serialization: 比原生方法JSON.stringify还要快两倍，前提是基于JSON Schema</li></ul><h1 id="API功能"><a href="#API功能" class="headerlink" title="API功能"></a>API功能</h1><h2 id="register"><a href="#register" class="headerlink" title="register"></a>register</h2><p>可以使用<code>register</code>注册数据库连接或者路由，这是 Fastify 最棒的特性之一了！它使得插件按声明的顺序来加载，唯有当前插件加载完毕后，才会加载下一个插件。<br>如此，我们便可以在第一个插件中注册数据库连接器，并在第二个插件中使用它。(参见 这里 了解如何处理插件的作用域)。 当调用函数 <code>fastify.listen()</code>、<code>fastify.inject()</code> 或 <code>fastify.ready()</code> 时，插件便开始加载了。</p><h1 id="ts-简单用户登陆功能"><a href="#ts-简单用户登陆功能" class="headerlink" title="ts+简单用户登陆功能"></a>ts+简单用户登陆功能</h1><pre><code class="hljs ts"><span class="hljs-keyword">import</span> fastify <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;fastify&#x27;</span><span class="hljs-keyword">import</span> &#123; request &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;http&#x27;</span><span class="hljs-keyword">const</span> server = fastify()<span class="hljs-keyword">interface</span> IQuerystring &#123;  username: <span class="hljs-built_in">string</span>  password: <span class="hljs-built_in">string</span>&#125;<span class="hljs-keyword">interface</span> IHeaders &#123;  <span class="hljs-string">&#x27;H-Custom&#x27;</span>: <span class="hljs-built_in">string</span>&#125;server.get(<span class="hljs-string">&#x27;/ping&#x27;</span>, <span class="hljs-keyword">async</span> (request, reply) =&gt; &#123;  <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;pong\n&#x27;</span>&#125;)server.get&lt;&#123;  Querystring: IQuerystring  Headers: IHeaders&#125;&gt;(  <span class="hljs-string">&#x27;/auth&#x27;</span>,  &#123;    preValidation: <span class="hljs-function">(<span class="hljs-params">request, reply, done</span>) =&gt;</span> &#123;      <span class="hljs-keyword">const</span> &#123; username, password &#125; = request.query      done(username !== <span class="hljs-string">&#x27;admin&#x27;</span> ? <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&#x27;Must be admin&#x27;</span>) : <span class="hljs-literal">undefined</span>)    &#125;  &#125;,  <span class="hljs-keyword">async</span> (request, reply) =&gt; &#123;    <span class="hljs-keyword">const</span> customHeader = request.headers[<span class="hljs-string">&#x27;H-Custom&#x27;</span>]    <span class="hljs-keyword">return</span> <span class="hljs-string">`logged in!`</span>  &#125;)server.listen(<span class="hljs-number">3000</span>, <span class="hljs-function">(<span class="hljs-params">err, address</span>) =&gt;</span> &#123;  <span class="hljs-keyword">if</span> (err) &#123;    <span class="hljs-built_in">console</span>.error(err)    process.exit(<span class="hljs-number">1</span>)  &#125;  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Server listening at <span class="hljs-subst">$&#123;address&#125;</span>`</span>)&#125;)</code></pre><h2 id="插件加载顺序"><a href="#插件加载顺序" class="headerlink" title="插件加载顺序"></a>插件加载顺序</h2><p>└── 来自 Fastify 生态的插件<br>└── 你自己的插件<br>└── 装饰器<br>└── 钩子函数<br>└── 你的服务应用</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>fastify</tag>
+      
+      <tag>node</tag>
+      
+      <tag>backend</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>使用腾讯云轻松开发直播场景</title>
+    <link href="/2020/09/08/%E4%BD%BF%E7%94%A8%E8%85%BE%E8%AE%AF%E4%BA%91%E8%BD%BB%E6%9D%BE%E5%BC%80%E5%8F%91%E7%9B%B4%E6%92%AD%E5%9C%BA%E6%99%AF%E5%90%8C%E6%97%B6%E6%94%AF%E6%8C%81%E5%90%8C%E5%A3%B0%E7%BF%BB%E8%AF%91/"/>
+    <url>/2020/09/08/%E4%BD%BF%E7%94%A8%E8%85%BE%E8%AE%AF%E4%BA%91%E8%BD%BB%E6%9D%BE%E5%BC%80%E5%8F%91%E7%9B%B4%E6%92%AD%E5%9C%BA%E6%99%AF%E5%90%8C%E6%97%B6%E6%94%AF%E6%8C%81%E5%90%8C%E5%A3%B0%E7%BF%BB%E8%AF%91/</url>
+    
+    <content type="html"><![CDATA[<h1 id="云直播基本概念"><a href="#云直播基本概念" class="headerlink" title="云直播基本概念"></a>云直播基本概念</h1><h2 id="推流"><a href="#推流" class="headerlink" title="推流"></a>推流</h2><p>推送到服务器<br>主播将本地视频源和音频源推送到腾讯视频云服务器，在有些场景中也被称为 <strong>“RTMP 发布”</strong>。</p><h2 id="拉流"><a href="#拉流" class="headerlink" title="拉流"></a>拉流</h2><p>即直播播放</p><p>指已实现直播推流之后，用指定地址将腾讯视频云服务器中的视频源和音频源拉取播放的过程。其视频源是实时生成的，有人推流直播才有意义，一旦主播停播，直播 URL 也就失效了。而且由于是实时直播，所以播放器在播直播视频的时候是没有进度条的。</p><h2 id="推流域名"><a href="#推流域名" class="headerlink" title="推流域名"></a>推流域名</h2><p>需要提前准备</p><p>指用于推送直播流的域名，必选配置，该域名必须在使用直播服务前完成注册并备案。配置完推流域名后，直播服务会生成对应的推流地址</p><h2 id="播放域名"><a href="#播放域名" class="headerlink" title="播放域名"></a>播放域名</h2><p>需要提前准备</p><p>指用于播放直播流的域名，必选配置，该域名必须在使用直播服务前完成注册并备案。配置完播放域名后，直播服务会生成对应的播放地址</p><h2 id="StreamName-amp-AppName"><a href="#StreamName-amp-AppName" class="headerlink" title="StreamName &amp; AppName"></a>StreamName &amp; AppName</h2><p>StreamName 是一路流的标识符，通常与某个域名一起唯一标识一路流。</p><p>直播的应用名称，用于区分直播流媒体文件存放路径，默认为 live，可自定义。</p><h2 id="转码"><a href="#转码" class="headerlink" title="转码"></a>转码</h2><p>转码是将视频码流转换成另一个视频码流的过程，是一种离线任务。</p><p>通过转码，可以改变原始码流的编码格式、分辨率和码率等参数，从而适应不同终端和网络环境的播放。使用转码功能可以实现：</p><ul><li>适配更多终端：将原始视频转码成拥有更强终端适配能力的格式，使视频资源能够在更多设备上播放。</li><li>适配不同带宽：将视频转换成流畅、标清、高清或超清输出，用户可根据当前网络环境选择合适码率的视频播放。</li><li>节省带宽：采用更先进的编码方式转码，在不损失原始画质的情况下显著降低码率，节省播放带宽。</li></ul><h2 id="转码格式H-264，H-265"><a href="#转码格式H-264，H-265" class="headerlink" title="转码格式H.264，H.265"></a>转码格式H.264，H.265</h2><p>H.265</p><p>可利用1Mbps - 2Mbps的传输速度传送720P（分辨率1280*720）普通高清音视频传送。<br>改善码流、编码质量、延时和算法复杂度之间的关系，达到最优化设置。</p><h2 id="事件消息通知"><a href="#事件消息通知" class="headerlink" title="事件消息通知"></a>事件消息通知</h2><p>指推流过程中，直播触发事件通知，腾讯云按照配置模板信息主动发送请求到客户的服务器，客户的服务器负责应答验证请求</p><h2 id="防盗链"><a href="#防盗链" class="headerlink" title="防盗链"></a>防盗链</h2><p>指推流和播放 URL 中的 txSecret 字段，可防止攻击者伪造您的后台生成推流 URL 或者非法盗取您的播放地址进行谋利。</p><h2 id="直播录制"><a href="#直播录制" class="headerlink" title="直播录制"></a>直播录制</h2><p>在推流过程中，将直播原始流经过转音视频封装（不修改音频、视频数据以及对应的时间戳等信息）得到的视频文件存储到云点播平台。使用该功能需提前开通 云点播服务。</p><h2 id="水印"><a href="#水印" class="headerlink" title="水印"></a>水印</h2><p>在直播推流过程中，为保证视频版权不受侵犯，在转码过程中将设置好的水印合并到视频流中输出一个带有水印的视频流，水印内容可以为文字或图片。</p><h2 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h2><p>以固定时间间隔将直播推流视频画面截取下来，形成图片文件存储在对象存储 COS 中。开通截图功能需要先在您的 COS bucket 中授权云直播服务的数据写入权限，</p><h2 id="鉴黄"><a href="#鉴黄" class="headerlink" title="鉴黄"></a>鉴黄</h2><p>基于截图功能，系统通过推流域名已关联的截图鉴黄模板，鉴别直播推流过程中主播是否出现违规的直播内容。相关文档可参见 截图鉴黄配置。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>直播</tag>
+      
+      <tag>同传</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>TypeScript（一）</title>
+    <link href="/2020/09/04/TypeScript%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <url>/2020/09/04/TypeScript%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    
+    <content type="html"><![CDATA[<h1 id="深入理解TypeScript"><a href="#深入理解TypeScript" class="headerlink" title="深入理解TypeScript"></a>深入理解TypeScript</h1><p><a href="https://jkchao.github.io/typescript-book-chinese/">https://jkchao.github.io/typescript-book-chinese/</a></p><h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><pre><code class="hljs ts"><span class="hljs-comment">// 声明对象</span><span class="hljs-keyword">interface</span> User &#123;    name: <span class="hljs-built_in">string</span>;    id: <span class="hljs-built_in">number</span>;&#125;<span class="hljs-comment">// 创建对象</span><span class="hljs-keyword">const</span> user: User = &#123;    name: <span class="hljs-string">&#x27;Pony&#x27;</span>,    id: <span class="hljs-number">0</span>,&#125;<span class="hljs-comment">// 如果对象类型与接口不匹配，将会收到警告</span>Type <span class="hljs-string">&#x27;&#123; username: string; id: number; &#125;&#x27;</span> is not assignable to <span class="hljs-keyword">type</span> <span class="hljs-string">&#x27;User&#x27;</span>.  <span class="hljs-built_in">Object</span> literal may only specify known properties, and <span class="hljs-string">&#x27;username&#x27;</span> does not exist <span class="hljs-keyword">in</span> <span class="hljs-keyword">type</span> <span class="hljs-string">&#x27;User&#x27;</span>.</code></pre><p>可选属性</p><pre><code class="hljs ts"><span class="hljs-keyword">interface</span> SquareConfig &#123;  color?: <span class="hljs-built_in">string</span>;  width?: <span class="hljs-built_in">number</span>;&#125;</code></pre><p>只读属性<br>interface Point {<br>    readonly x: number;<br>    readonly y: number;<br>}</p><h1 id="变量类型"><a href="#变量类型" class="headerlink" title="变量类型"></a>变量类型</h1><pre><code class="hljs ts"><span class="hljs-keyword">let</span> name:<span class="hljs-built_in">string</span> = <span class="hljs-string">&#x27;hashy&#x27;</span>name = <span class="hljs-number">5</span> <span class="hljs-comment">// Error: Type &#x27;5&#x27; is not assignable to type &#x27;string&#x27;.</span><span class="hljs-keyword">let</span> isDone: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">false</span>;<span class="hljs-keyword">let</span> decLiteral: <span class="hljs-built_in">number</span> = <span class="hljs-number">6</span>;<span class="hljs-keyword">let</span> hexLiteral: <span class="hljs-built_in">number</span> = <span class="hljs-number">0xf00d</span>;<span class="hljs-keyword">let</span> binaryLiteral: <span class="hljs-built_in">number</span> = <span class="hljs-number">0b1010</span>;<span class="hljs-keyword">let</span> octalLiteral: <span class="hljs-built_in">number</span> = <span class="hljs-number">0o744</span>;<span class="hljs-comment">// 数组</span><span class="hljs-comment">// 方式1: 可以在元素类型后面接上 []，表示由此类型元素组成的一个数组</span><span class="hljs-keyword">let</span> list: <span class="hljs-built_in">number</span>[] = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];<span class="hljs-comment">// 方式2: 使用数组泛型，Array&lt;元素类型&gt;：</span><span class="hljs-keyword">let</span> list: <span class="hljs-built_in">Array</span>&lt;<span class="hljs-built_in">number</span>&gt; = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];<span class="hljs-comment">//元组 Tuple</span><span class="hljs-comment">// Declare a tuple type</span><span class="hljs-keyword">let</span> x: [<span class="hljs-built_in">string</span>, <span class="hljs-built_in">number</span>];<span class="hljs-comment">// Initialize it</span>x = [<span class="hljs-string">&#x27;hello&#x27;</span>, <span class="hljs-number">10</span>]; <span class="hljs-comment">// OK</span><span class="hljs-comment">// Initialize it incorrectly</span>x = [<span class="hljs-number">10</span>, <span class="hljs-string">&#x27;hello&#x27;</span>]; <span class="hljs-comment">// Error</span><span class="hljs-comment">// 枚举Enum</span><span class="hljs-built_in">enum</span> Color &#123;Red, Green, Blue&#125;<span class="hljs-keyword">let</span> c: Color = Color.Green;<span class="hljs-comment">// 默认情况下，从0开始为元素编号, 也可以手动的指定成员的数值</span><span class="hljs-built_in">enum</span> Color &#123;Red = <span class="hljs-number">1</span>, Green, Blue&#125;<span class="hljs-keyword">let</span> c: Color = Color.Green;<span class="hljs-comment">// Any</span><span class="hljs-comment">/*</span><span class="hljs-comment">有时候，我们会想要为那些在编程阶段还不清楚类型的变量指定一个类型。 这些值可能来自于动态的内容，比如来自用户输入或第三方代码库。 这种情况下，我们不希望类型检查器对这些值进行检查而是直接让它们通过编译阶段的检查。</span><span class="hljs-comment">*/</span><span class="hljs-keyword">let</span> notSure: <span class="hljs-built_in">any</span> = <span class="hljs-number">4</span>;notSure.ifItExists(); <span class="hljs-comment">// okay, ifItExists might exist at runtime</span>notSure.toFixed(); <span class="hljs-comment">// okay, toFixed exists (but the compiler doesn&#x27;t check)</span><span class="hljs-comment">// Void</span><span class="hljs-comment">/*</span><span class="hljs-comment">某种程度上来说，void 类型像是与 any 类型相反，它表示没有任何类型。 当一个函数没有返回值时，你通常会见到其返回值类型是 void。</span><span class="hljs-comment">声明一个 void 类型的变量没有什么大用，因为你只能为它赋予 undefined 和 null</span><span class="hljs-comment">*/</span><span class="hljs-keyword">let</span> unusable: <span class="hljs-built_in">void</span> = <span class="hljs-literal">undefined</span>;<span class="hljs-comment">// Null 和 Undefined</span><span class="hljs-comment">/*</span><span class="hljs-comment">undefined 和 null 两者各自有自己的类型分别叫做 undefined 和 null。 和 void相似，它们的本身的类型用处不是很大</span><span class="hljs-comment">*/</span><span class="hljs-keyword">let</span> u: <span class="hljs-literal">undefined</span> = <span class="hljs-literal">undefined</span>;<span class="hljs-keyword">let</span> n: <span class="hljs-literal">null</span> = <span class="hljs-literal">null</span>;<span class="hljs-comment">// Never</span><span class="hljs-comment">/*</span><span class="hljs-comment">never 类型表示的是那些永不存在的值的类型。 例如，never 类型是那些总是会抛出异常或根本就不会有返回值的函数表达式或箭头函数表达式的返回值类型； 变量也可能是 never 类型，当它们被永不为真的类型保护所约束时。</span><span class="hljs-comment">never 类型是任何类型的子类型，也可以赋值给任何类型；然而，没有类型是 never 的子类型或可以赋值给 never 类型（除了 never 本身之外）。 即使 any 也不可以赋值给 never。</span><span class="hljs-comment">*/</span><span class="hljs-comment">// 返回never的函数必须存在无法达到的终点</span><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">error</span>(<span class="hljs-params">message: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">never</span> </span>&#123;    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(message);&#125;<span class="hljs-comment">// 返回never的函数必须存在无法达到的终点</span><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">infiniteLoop</span>(<span class="hljs-params"></span>): <span class="hljs-title">never</span> </span>&#123;    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123;    &#125;&#125;<span class="hljs-comment">// Object</span><span class="hljs-comment">// object 表示非原始类型，也就是除 number，string，boolean，symbol，null 或 undefined 之外的类型。</span><span class="hljs-comment">// 使用 object 类型，就可以更好的表示像 Object.create 这样的API</span><span class="hljs-keyword">declare</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">create</span>(<span class="hljs-params">o: <span class="hljs-built_in">object</span> | <span class="hljs-literal">null</span></span>): <span class="hljs-title">void</span></span>;create(&#123; prop: <span class="hljs-number">0</span> &#125;); <span class="hljs-comment">// OK</span>create(<span class="hljs-literal">null</span>); <span class="hljs-comment">// OK</span>create(<span class="hljs-number">42</span>); <span class="hljs-comment">// Error</span></code></pre><h1 id="类型断言"><a href="#类型断言" class="headerlink" title="类型断言"></a>类型断言</h1><p>通过类型断言这种方式可以告诉编译器，“相信我，我知道自己在干什么”。 类型断言好比其它语言里的类型转换，但是不进行特殊的数据检查和解构。 它没有运行时的影响，只是在编译阶段起作用。 TypeScript 会假设你，程序员，已经进行了必须的检查。</p><p>类型断言有两种形式。 其一是“尖括号”语法</p><pre><code class="hljs ts"><span class="hljs-keyword">let</span> someValue: <span class="hljs-built_in">any</span> = <span class="hljs-string">&quot;this is a string&quot;</span><span class="hljs-keyword">let</span> strLengthL <span class="hljs-built_in">number</span> = (&lt;<span class="hljs-built_in">string</span>&gt;someValue).length</code></pre><p>另一个为 as 语法</p><pre><code class="hljs ts"><span class="hljs-keyword">let</span> someValue: <span class="hljs-built_in">any</span> = <span class="hljs-string">&quot;this is a string&quot;</span>;<span class="hljs-keyword">let</span> strLength: <span class="hljs-built_in">number</span> = (someValue <span class="hljs-keyword">as</span> <span class="hljs-built_in">string</span>).length;</code></pre><p>两种形式是等价的。 至于使用哪个大多数情况下是凭个人喜好；然而，当你在 TypeScript 里使用 JSX 时，只有 as 语法断言是被允许的。</p><h1 id="函数语法"><a href="#函数语法" class="headerlink" title="函数语法"></a>函数语法</h1><pre><code class="hljs ts"><span class="hljs-comment">// 构造函数接口 //</span><span class="hljs-keyword">interface</span> User &#123;    name: <span class="hljs-built_in">string</span>;    id: <span class="hljs-built_in">number</span>;&#125;<span class="hljs-keyword">class</span> UserAccout &#123;    name: <span class="hljs-built_in">string</span>;    id: <span class="hljs-built_in">number</span>;    <span class="hljs-keyword">constructor</span>(<span class="hljs-params">name: <span class="hljs-built_in">string</span>, id:<span class="hljs-built_in">number</span></span>)&#123;        <span class="hljs-built_in">this</span>.name = name;        <span class="hljs-built_in">this</span>.id = id;    &#125;&#125;<span class="hljs-keyword">const</span> user1: User = <span class="hljs-keyword">new</span> UserAccout(<span class="hljs-string">&quot;Pony&quot;</span>, <span class="hljs-number">1</span>)<span class="hljs-comment">// 函数返回值 //</span><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getAdminUser</span>(<span class="hljs-params"></span>): <span class="hljs-title">User</span> </span>&#123;    <span class="hljs-keyword">return</span> user&#125;<span class="hljs-comment">// 函数参数 //</span><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">deleteUser</span>(<span class="hljs-params">user: User</span>)</span>&#123;    <span class="hljs-comment">// ...</span>&#125;</code></pre><h1 id="支持的类型"><a href="#支持的类型" class="headerlink" title="支持的类型"></a>支持的类型</h1><pre><code class="hljs ts"><span class="hljs-comment">// ts 支持的类型</span>原生：<span class="hljs-built_in">boolean</span>，bigint，<span class="hljs-literal">null</span>，<span class="hljs-built_in">number</span>，<span class="hljs-built_in">string</span>，symbol，<span class="hljs-built_in">object</span>，和<span class="hljs-literal">undefined</span>TS：<span class="hljs-built_in">any</span>（允许任何操作）、unknown（确保使用此类型的人声明该类型是什么）、<span class="hljs-built_in">never</span>（此类型不可能发生）和<span class="hljs-built_in">void</span>（返回<span class="hljs-literal">undefined</span>或不返回的函数值）。</code></pre><h1 id="组合类型"><a href="#组合类型" class="headerlink" title="组合类型"></a>组合类型</h1><pre><code class="hljs ts"><span class="hljs-comment">// 自定义类型</span><span class="hljs-keyword">type</span> MyBool  = <span class="hljs-literal">true</span> | <span class="hljs-literal">false</span><span class="hljs-comment">// 用于描述枚举</span><span class="hljs-keyword">type</span> WindowStates = <span class="hljs-string">&quot;open&quot;</span> | <span class="hljs-string">&quot;closed&quot;</span> | <span class="hljs-string">&quot;minimized&quot;</span>;<span class="hljs-keyword">type</span> OddNumbersUnderTen = <span class="hljs-number">1</span> | <span class="hljs-number">3</span> | <span class="hljs-number">5</span> | <span class="hljs-number">7</span> | <span class="hljs-number">9</span>;<span class="hljs-comment">// 同时处理不同类型</span><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getLength</span>(<span class="hljs-params">obj: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">string</span>[]</span>)</span>&#123;    <span class="hljs-keyword">return</span> obj.length&#125;</code></pre>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>typescript4.0</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>（转载）从0创业到管理10人团队的感悟</title>
+    <link href="/2020/09/04/%E8%BD%AC%E8%BD%BD-%E4%BB%8E0%E5%88%9B%E4%B8%9A%E5%88%B0%E7%AE%A1%E7%90%8610%E4%BA%BA%E5%9B%A2%E9%98%9F%E7%9A%84%E6%84%9F%E6%82%9F/"/>
+    <url>/2020/09/04/%E8%BD%AC%E8%BD%BD-%E4%BB%8E0%E5%88%9B%E4%B8%9A%E5%88%B0%E7%AE%A1%E7%90%8610%E4%BA%BA%E5%9B%A2%E9%98%9F%E7%9A%84%E6%84%9F%E6%82%9F/</url>
+    
+    <content type="html"><![CDATA[<h1 id="内功业务"><a href="#内功业务" class="headerlink" title="内功业务"></a>内功业务</h1><p><img src="../assets/imgs/1580623255291-c691df34-55ff-4c94-8218-f063050fff27.png"></p><h1 id="外功管理"><a href="#外功管理" class="headerlink" title="外功管理"></a>外功管理</h1><p><img src="../assets/imgs/1580623912557-89debcf2-dd2e-432e-96ad-93cf06a4e6c2.png" alt="avatar"></p><p>lweein：要想办法让团队拥有信任感，彼此在工作中是可以互相依靠的，这种信任感的形成对团队的效率有根本性的提升。同时，一种氛围，针对年龄段和大家的各种喜好，要有一个把握，让每个人可以拥有属于自己的工作空间，隐私权，以及分享乐趣。<strong>培养一个人最好的方式就是让他去解决问题，要做到尽量给他一块地，让他去解决怎么种出来玉米。而不是告诉他，现在要去浇水，等会要去施肥。这应该是他去考虑和总结的过程，而不是leader或者老板指定。</strong></p><p><img src="../assets/imgs/1580626728081-1ed34fea-8553-4d5a-aec2-5a48b7d5df20.png"></p><h1 id="公司在什么情况下需要做基建？"><a href="#公司在什么情况下需要做基建？" class="headerlink" title="公司在什么情况下需要做基建？"></a>公司在什么情况下需要做基建？</h1><ul><li>初创期先去做业务（因为得活下去）</li><li>起步期适当工具化，研究前后端分层，局部规范，单点工具等</li><li>快速发展期工程化，让项目开发流程标准化、自动化、系统化</li><li>成熟期智能化，让项目云端化、集成化、产品化</li></ul><h1 id="如何向领导建议去做基建？"><a href="#如何向领导建议去做基建？" class="headerlink" title="如何向领导建议去做基建？"></a>如何向领导建议去做基建？</h1><p>建议之前需做足准备，</p><ul><li>摸底团队技术现状，有无大牛，多少技术债，是否要招人</li><li>行业摸底，是否有替代方案，纯自研/半自研/付费</li><li>团队问题识别，问题清单，是否紧急</li><li>人才/组织现状摸底，有没有钱和时间</li><li>量化价值，应用场景/指标/收益对象</li><li>做事章法规划，发现|识别|定义问题<br>要有数字、分析、优先级、里程碑、对比、大盘、人头。过程严谨到让老板无话可说</li></ul>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>管理</tag>
+      
+      <tag>创业</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>web-components组件库开发（二）Stencil</title>
+    <link href="/2020/09/03/web-components%E7%BB%84%E4%BB%B6%E5%BA%93%E5%BC%80%E5%8F%91%EF%BC%88%E4%BA%8C%EF%BC%89Stencil/"/>
+    <url>/2020/09/03/web-components%E7%BB%84%E4%BB%B6%E5%BA%93%E5%BC%80%E5%8F%91%EF%BC%88%E4%BA%8C%EF%BC%89Stencil/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>vscode插件篇（三）prettier及其配置</title>
+    <link href="/2020/09/03/vscode%E6%8F%92%E4%BB%B6%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89prettier%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE/"/>
+    <url>/2020/09/03/vscode%E6%8F%92%E4%BB%B6%E7%AF%87%EF%BC%88%E4%B8%89%EF%BC%89prettier%E5%8F%8A%E5%85%B6%E9%85%8D%E7%BD%AE/</url>
+    
+    <content type="html"><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p><code>Prettier</code> 可有统一格式化项目代码，并且配置vscode插件可以自动格式化，配合<code>git hooks</code>还可以在提交代码前，一定格式化代码</p><p>支持很多格式：</p><ul><li>JavaScript</li><li>JSX</li><li>Angular</li><li>Vue</li><li>Flow</li><li>TypeScript</li><li>CSS, Less, SCSS</li><li>HTML</li><li>JSON</li><li>GraphQL</li><li>Markdown</li><li>YAML</li></ul><p>它和<code>Linter</code>系列比如<code>ESLint</code>的区别在于<code>Prettier</code>是一个专注于代码格式化的工具，对代码不做质量检查。</p><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><pre><code class="hljs bash">npm install prettier --save-dev</code></pre><h1 id="CLI"><a href="#CLI" class="headerlink" title="CLI"></a>CLI</h1><p>git hooks里使用非常方便</p><pre><code class="hljs bash">prettier: <span class="hljs-string">&quot;prettier --write --loglevel warn .&quot;</span>pre-commit: <span class="hljs-string">&quot;npm run prettier &amp;&amp; npm run lint&quot;</span></code></pre><h1 id="和prettier整合"><a href="#和prettier整合" class="headerlink" title="和prettier整合"></a>和prettier整合</h1><p>eslint-plugin-prettier插件会调用prettier对你的代码风格进行检查</p><pre><code class="hljs bash">npm i -D eslint-plugin-prettier//.eslintrc.js&#123;  <span class="hljs-string">&quot;plugins&quot;</span>: [<span class="hljs-string">&quot;prettier&quot;</span>],  <span class="hljs-string">&quot;rules&quot;</span>: &#123;    <span class="hljs-string">&quot;prettier/prettier&quot;</span>: <span class="hljs-string">&quot;error&quot;</span>  &#125;&#125;</code></pre><h1 id="解决和eslint的冲突"><a href="#解决和eslint的冲突" class="headerlink" title="解决和eslint的冲突"></a>解决和eslint的冲突</h1><pre><code class="hljs awk">npm i -D eslint-config-prettier<span class="hljs-regexp">//</span>.eslintrc.js&#123;  extends: [    <span class="hljs-string">&#x27;standard&#x27;</span>, <span class="hljs-regexp">//</span>使用standard做代码规范    <span class="hljs-string">&quot;prettier&quot;</span>,  ],&#125;复制代码</code></pre><p>prettier: 格式化规则程序<br>eslint-config-prettier: 将禁用任何可能干扰现有 prettier 规则的 linting 规则<br>eslint-plugin-prettier: 将作为ESlint 的一部分运行 Prettier分析。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>vscode插件</tag>
+      
+      <tag>ide</tag>
+      
+      <tag>prettier</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>vscode插件篇（二）eslint&amp;eslintrc.json配置 </title>
+    <link href="/2020/09/03/vscode%E6%8F%92%E4%BB%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89eslint-eslintrc-json%E9%85%8D%E7%BD%AE/"/>
+    <url>/2020/09/03/vscode%E6%8F%92%E4%BB%B6%E7%AF%87%EF%BC%88%E4%BA%8C%EF%BC%89eslint-eslintrc-json%E9%85%8D%E7%BD%AE/</url>
+    
+    <content type="html"><![CDATA[<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>ESLint 是一个Javascript Linter，帮助我们规范代码质量，提高团队开发效率。</p><p><img src="https://pic1.zhimg.com/80/v2-cda7dd631f85be0ec0cdd882f42c80c8_1440w.jpg"></p><p>ESLint 是一个开源的 JavaScript 代码检查工具</p><p>JavaScript 是一个动态的弱类型语言，在开发中比较容易出错。因为没有编译程序，为了寻找 JavaScript 代码错误通常需要在执行过程中不断调试。像 ESLint 这样的可以让程序员在编码的过程中发现问题而不是在执行的过程中。</p><p>ESLint 的初衷是为了让程序员可以创建自己的检测规则。ESLint 的所有规则都被设计成可插拔的。为了便于人们使用，ESLint 内置了一些规则，当然，你可以在使用过程中自定义规则。所有的规则默认都是禁用的。<br>ESLint 使用 Node.js 编写。</p><h1 id="eslint配置"><a href="#eslint配置" class="headerlink" title="eslint配置"></a>eslint配置</h1><p>一般都采用<code>.eslintrc.*</code>的配置文件进行配置, 如果放在项目的根目录中，则会作用于整个项目。</p><p>子目录中也包含着<code>.eslintrc</code>文件，则对于子目录中文件的检查会忽略掉根目录中的配置，而直接采用子目录中的配置</p><p>ESLint采用逐级向上查找的方式查找<code>.eslintrc.*</code>文件，当找到带有<code>&quot;root&quot;: true</code>配置项的<code>.eslintrc.*</code>文件时，将会停止向上查找。</p><pre><code class="hljs js"><span class="hljs-built_in">module</span>.exports = &#123;    parser: <span class="hljs-string">&#x27;babel-eslint&#x27;</span>, <span class="hljs-comment">// parser指定解析器，默认的为espree。babel-eslint是一个Babel parser的包装器，这个包装器使得 Babel parser 可以和 ESLint 协调工作</span>    parserOptions: &#123;        sourceType: <span class="hljs-string">&#x27;module&#x27;</span>, <span class="hljs-comment">// 设置为 &quot;script&quot; (默认) 或 &quot;module&quot;（ES6)。</span>        ecmaFeatures: &#123; <span class="hljs-comment">// 这是个对象，表示你想使用的额外的语言特性:</span>            jsx: <span class="hljs-literal">true</span> <span class="hljs-comment">// 启用 JSX</span>        &#125;    &#125;,    <span class="hljs-keyword">extends</span>: [<span class="hljs-string">&#x27;eslint:recommended&#x27;</span>], <span class="hljs-comment">// 使用eslint推荐的规则作为基础配置，可以在rules中覆盖</span>    plugins: [<span class="hljs-string">&#x27;html&#x27;</span>, <span class="hljs-string">&#x27;vue&#x27;</span>, <span class="hljs-string">&#x27;prettier&#x27;</span>, <span class="hljs-string">&#x27;import&#x27;</span>], <span class="hljs-comment">// vue是eslint-plugin-vue的简写，此插件的作用是可以让eslint识别.vue中的script代码</span>    rules: &#123; <span class="hljs-comment">// 0或者off表示规则关闭，出错也被忽略；1或者warn表示如果出错会给出警告(不会导致程序退出)；2或者error表示如果出错会报出错误(会导致程序退出，退出码是1)</span>        <span class="hljs-string">&#x27;no-console&#x27;</span>: <span class="hljs-string">&#x27;off&#x27;</span>,        <span class="hljs-string">&#x27;prefer-const&#x27;</span>: <span class="hljs-string">&#x27;error&#x27;</span>,        <span class="hljs-string">&#x27;prettier/prettier&#x27;</span>: <span class="hljs-string">&#x27;warn&#x27;</span>,        <span class="hljs-string">&#x27;prefer-arrow-callback&#x27;</span>: <span class="hljs-string">&#x27;warn&#x27;</span>,        <span class="hljs-string">&#x27;no-debugger&#x27;</span>: process.env.NODE_ENV === <span class="hljs-string">&#x27;production&#x27;</span> ? <span class="hljs-number">2</span> : <span class="hljs-number">0</span>    &#125;,    globals: &#123; <span class="hljs-comment">// 允许在代码中使用全局变量</span>        location: <span class="hljs-literal">true</span>,        <span class="hljs-built_in">setTimeout</span>: <span class="hljs-literal">true</span>    &#125;&#125;;</code></pre><h1 id="功能模块"><a href="#功能模块" class="headerlink" title="功能模块"></a>功能模块</h1><ul><li>支持JSX语法 eslint-plugin-react</li><li>支持ES6语法 { “parserOptions”: { “ecmaVersion”: 6 } }</li><li>支持ES6全局变量 { “env”: { “es6”: true } }</li></ul><h1 id="指定解析器"><a href="#指定解析器" class="headerlink" title="指定解析器"></a>指定解析器</h1><pre><code class="hljs js">&#123;    <span class="hljs-string">&quot;parser&quot;</span>: <span class="hljs-string">&quot;esprima&quot;</span>,    <span class="hljs-string">&quot;rules&quot;</span>: &#123;        <span class="hljs-string">&quot;semi&quot;</span>: <span class="hljs-string">&quot;error&quot;</span>    &#125;&#125;</code></pre><p>以下解析器与ESLint兼容：</p><ul><li>Esprima</li><li>Babel-ESLint - Babel解析器的包装，使其与ESLint兼容。</li><li>@typescript-eslint/parser 一种将TypeScript转换为与ESTree兼容的形式以便可以在ESLint中使用的解析器。</li></ul><h1 id="配置插件"><a href="#配置插件" class="headerlink" title="配置插件"></a>配置插件</h1><pre><code class="hljs js">&#123;    <span class="hljs-string">&quot;plugins&quot;</span>: [        <span class="hljs-string">&quot;plugin1&quot;</span>,        <span class="hljs-string">&quot;eslint-plugin-plugin2&quot;</span>    ]&#125;</code></pre><h1 id="继承规则｜扩展"><a href="#继承规则｜扩展" class="headerlink" title="继承规则｜扩展"></a>继承规则｜扩展</h1><p>extends: [],</p><h1 id="eslintignore"><a href="#eslintignore" class="headerlink" title=".eslintignore"></a>.eslintignore</h1><p>您可以通过.eslintignore在项目的根目录中创建文件来告诉ESLint忽略特定的文件和目录。该.eslintignore文件是纯文本文件，其中每行是一个glob模式，指示在掉毛时应省略哪些路径。例如，以下将省略所有JavaScript文件：</p><pre><code class="hljs asciidoc">*<span class="hljs-strong">*/*</span>.js</code></pre>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>vscode插件</tag>
+      
+      <tag>ide</tag>
+      
+      <tag>eslint</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Vscode插件篇（一）editorconfig</title>
+    <link href="/2020/09/03/Vscode%E6%8F%92%E4%BB%B6%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89editorconfig/"/>
+    <url>/2020/09/03/Vscode%E6%8F%92%E4%BB%B6%E7%AF%87%EF%BC%88%E4%B8%80%EF%BC%89editorconfig/</url>
+    
+    <content type="html"><![CDATA[<h1 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h1><p>主要用于统一编辑代码时的风格，其中主要统一的是缩进的风格。文件形式，根目录下的 <code>.editorconfig</code></p><p>有些编辑器自带了对这个文件的支持，无需安装插件。有些则需要再自行安装相应插件。</p><p><strong>(vscode需要安装插件 EditorConfig for VS Code)</strong></p><blockquote><p>官方: <a href="https://editorconfig.org/">https://editorconfig.org/</a></p></blockquote><h1 id="配置信息"><a href="#配置信息" class="headerlink" title="配置信息"></a>配置信息</h1><pre><code class="hljs bash"><span class="hljs-comment"># http://editorconfig.org</span><span class="hljs-comment"># 表明这是最顶层的配置文件，这样才会停止继续向上查找 .editorconfig 文件；</span><span class="hljs-comment"># 查找的 .editorconfig 文件是从顶层开始读取的，类似变量作用域的效果，内部</span><span class="hljs-comment"># 的 .editorconfig 文件属性优先级更高</span>root = <span class="hljs-literal">true</span><span class="hljs-comment"># 指定作用文件格式</span>[*]<span class="hljs-comment"># 编码格式。支持latin1、utf-8、utf-8-bom、utf-16be和utf-16le，不建议使用uft-8-bom。</span>charset = utf-8<span class="hljs-comment"># 缩进的类型 [space | tab]</span>indent_style = space<span class="hljs-comment"># 缩进的大小 </span>indent_size = 2<span class="hljs-comment"># 定义换行符 [lf | cr | crlf]</span>end_of_line = lf<span class="hljs-comment"># 文件是否以一个空白行结尾 [true | false]</span>insert_final_newline = <span class="hljs-literal">true</span><span class="hljs-comment"># 是否除去换行行首的任意空白字符</span>trim_trailing_whitespace = <span class="hljs-literal">true</span>[*.md]insert_final_newline = <span class="hljs-literal">false</span>trim_trailing_whitespace = <span class="hljs-literal">false</span>[Makefile]indent_style = tab</code></pre>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>vscode插件</tag>
+      
+      <tag>ide</tag>
+      
+      <tag>editorconfig</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Stencil</title>
+    <link href="/2020/09/02/Stencil/"/>
+    <url>/2020/09/02/Stencil/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>web-components</title>
+    <link href="/2020/09/02/web-components%E7%BB%84%E4%BB%B6%E5%BA%93%E5%BC%80%E5%8F%91%EF%BC%88%E4%B8%80%EF%BC%89%E6%A6%82%E5%BF%B5/"/>
+    <url>/2020/09/02/web-components%E7%BB%84%E4%BB%B6%E5%BA%93%E5%BC%80%E5%8F%91%EF%BC%88%E4%B8%80%EF%BC%89%E6%A6%82%E5%BF%B5/</url>
+    
+    <content type="html"><![CDATA[<h1 id="stencil-介绍"><a href="#stencil-介绍" class="headerlink" title="stencil 介绍"></a>stencil 介绍</h1><h1 id="为什么要用-stencil"><a href="#为什么要用-stencil" class="headerlink" title="为什么要用 stencil"></a>为什么要用 stencil</h1><p>相比于浏览器原生接口拥有更丰富的功能：</p><ul><li>虚拟 DOM</li><li>异步渲染（受 React Fiber 的启发）</li><li>相应式数据绑定</li><li>TypeScript</li><li>JSX</li><li>静态网站生成（SSG）</li></ul><h1 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h1><ul><li>Component</li><li>Prop</li><li>Watch</li><li>State</li><li>Method</li><li>Element</li><li>Event</li><li>EventEmitter</li><li>Listen</li></ul><h2 id="Component"><a href="#Component" class="headerlink" title="Component"></a>Component</h2><p>装饰当前类为组件类，并且可以提前声明相关元数据</p><pre><code class="hljs ts"><span class="hljs-meta">@Component</span>(&#123;  tag: <span class="hljs-string">&#x27;my-component&#x27;</span>, <span class="hljs-comment">// 标签名</span>  styleUrl: <span class="hljs-string">&#x27;my-component.css&#x27;</span>, <span class="hljs-comment">// 样式链接，可以使用styleUrls插入数组</span>  host: &#123;    theme: <span class="hljs-string">&#x27;todo&#x27;</span>,    role: <span class="hljs-string">&#x27;list&#x27;</span>  &#125;,  shadow: <span class="hljs-literal">true</span>&#125;)<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyComponent &#123;&#125;</code></pre><h2 id="Prop"><a href="#Prop" class="headerlink" title="Prop"></a>Prop</h2><p>声明传入的参数</p><pre><code class="hljs less"><span class="hljs-variable">@Prop</span>() <span class="hljs-attribute">prop1</span>: any<span class="hljs-variable">@Prop</span>() <span class="hljs-attribute">prop1</span>: number = <span class="hljs-number">1</span> <span class="hljs-comment">// 设置默认值</span><span class="hljs-variable">@Prop</span>(&#123; <span class="hljs-attribute">mutable</span>: true &#125;) <span class="hljs-attribute">prop2</span>: any <span class="hljs-comment">// 可变动</span><span class="hljs-variable">@Prop</span>(&#123; <span class="hljs-attribute">reflectToAttr</span>: true &#125;) <span class="hljs-attribute">prop3</span>: any <span class="hljs-comment">// 反射</span></code></pre><p>使用注意：html 文件中使用要使用 a-b 连字符，组件中使用 aB 驼峰标识。</p><h2 id="Watch"><a href="#Watch" class="headerlink" title="Watch"></a>Watch</h2><p>常规的观察装饰器，可以用来监听某个 Prop 的变化</p><pre><code class="hljs ts"><span class="hljs-meta">@Watch</span>(<span class="hljs-string">&#x27;username&#x27;</span>)watchHandler(newValue: <span class="hljs-built_in">any</span>, oldValue: <span class="hljs-built_in">any</span>)&#123;    <span class="hljs-comment">// todo</span>&#125;</code></pre><h2 id="State"><a href="#State" class="headerlink" title="State"></a>State</h2><p>内部装太，跟 React 的 State 一个意思，不过更新不用 setState，直接修改即可</p><pre><code class="hljs ts"><span class="hljs-meta">@State</span>() state1: <span class="hljs-built_in">number</span>=<span class="hljs-number">1</span></code></pre><h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>函数装饰器，用来说明这是一个函数</p><h2 id="Element"><a href="#Element" class="headerlink" title="Element"></a>Element</h2><p>可以用来获取当前组件的<code>DOM</code>实例,进行常规<code>DOM</code>操作</p><pre><code class="hljs ts"><span class="hljs-meta">@Element</span>() ele: HTMLElement</code></pre><h2 id="Event-EventEmitter"><a href="#Event-EventEmitter" class="headerlink" title="Event,EventEmitter"></a>Event,EventEmitter</h2><p>事件装饰器,事件发射器</p><pre><code class="hljs ts"><span class="hljs-keyword">import</span> &#123; Event, EventEmitter &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@stencil/core&#x27;</span><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> TodoList &#123;  <span class="hljs-meta">@Event</span>() todoCompleted: EventEmitter  todoCompletedHandler (todo: Todo) &#123;    <span class="hljs-built_in">this</span>.todoCompleted.emit(todo)  &#125;&#125;</code></pre><h2 id="Listen"><a href="#Listen" class="headerlink" title="Listen"></a>Listen</h2><p>事件监听器</p><pre><code class="hljs ts"><span class="hljs-meta">@Listen</span>(<span class="hljs-string">&#x27;body:scroll&#x27;</span>)handleScroll(ev) &#123;  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;the body was scrolled&#x27;</span>, ev);&#125;</code></pre><h2 id="JSX-监听"><a href="#JSX-监听" class="headerlink" title="JSX 监听"></a>JSX 监听</h2><h1 id="数据响应"><a href="#数据响应" class="headerlink" title="数据响应"></a>数据响应</h1><p>有点尴尬，也有点强势。</p><p>不支持监听数组（对象一样）本身变动，意思说：</p><blockquote><p>改动数组本身，不会引起响应，比如 pop、push 啦，统战思想就是，换新数组。</p></blockquote><h1 id="Shadow-DOM"><a href="#Shadow-DOM" class="headerlink" title="Shadow DOM"></a>Shadow DOM</h1><p>这玩意是一组 API，功能大体是用来封装 Web Component 到局部，类似 Vue 等的 scoped 功能。</p><p>Stencil 默认不使用 Shadow DOM，开启如下：</p><pre><code class="hljs ts"><span class="hljs-meta">@Component</span>(&#123;  tag: <span class="hljs-string">&#x27;shadow-component&#x27;</span>,  styleUrl: <span class="hljs-string">&#x27;shadow-component.scss&#x27;</span>,  shadow: <span class="hljs-literal">true</span>&#125;)<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> ShadowComponent &#123;&#125;</code></pre><p>就是 Component 装饰器一个 shadow 的元数据。</p><p>此时获取组件内的 DOM 实例则使用：<code>this.el.shadowRoot.querySelector()</code></p><p>之前使用的 css 文件声明：</p><pre><code class="hljs css"><span class="hljs-selector-tag">my-element</span> &#123;  div &#123;    <span class="hljs-selector-tag">background</span>: <span class="hljs-selector-tag">blue</span>;  &#125;&#125;</code></pre><p>可以改为：</p><pre><code class="hljs css"><span class="hljs-selector-pseudo">:host</span> &#123;  div &#123;    <span class="hljs-selector-tag">background</span>: <span class="hljs-selector-tag">blue</span>;  &#125;&#125;</code></pre>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>web-components</tag>
+      
+      <tag>组件库</tag>
+      
+      <tag>stencil</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>tsconfig</title>
+    <link href="/2020/09/02/tsconfig/"/>
+    <url>/2020/09/02/tsconfig/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>开发组件库的思考</title>
+    <link href="/2020/09/02/%E5%BC%80%E5%8F%91%E7%BB%84%E4%BB%B6%E5%BA%93%E7%9A%84%E6%80%9D%E8%80%83/"/>
+    <url>/2020/09/02/%E5%BC%80%E5%8F%91%E7%BB%84%E4%BB%B6%E5%BA%93%E7%9A%84%E6%80%9D%E8%80%83/</url>
+    
+    <content type="html"><![CDATA[<h2 id="第一个问题：开源还是造轮子"><a href="#第一个问题：开源还是造轮子" class="headerlink" title="第一个问题：开源还是造轮子?"></a>第一个问题：开源还是造轮子?</h2><p>已经有很多优秀的组件库，如Material-UI，antd等，组件丰富且质量过硬，看似简单，但却困难从从，是否需要从头开发一套组件库判断依据，以供参考：</p><ul><li>产品有独特的设计规范、如组件样式。交互模式</li><li>产品业务场景复杂，需要深度定制某些常用组件</li><li>多业务线支撑</li></ul><h2 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h2>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>前端</tag>
+      
+      <tag>组件</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="/2020/09/02/hello-world/"/>
+    <url>/2020/09/02/hello-world/</url>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="hljs bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="hljs bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="hljs bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  
+</search>

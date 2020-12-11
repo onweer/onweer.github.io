@@ -1,0 +1,632 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>GraphQL官方规范 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_6peoq002giu.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.1.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-09-25 10:57" pubdate>
+      2020年9月25日 上午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">GraphQL官方规范</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h1 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h1><p>GraphQL 是一个用于 API 的查询语言，是一个使用基于类型系统来执行查询的服务端运行时（类型系统由你的数据定义）。GraphQL 并没有和任何特定数据库或者存储引擎绑定，而是依靠你现有的代码和数据支撑。</p>
+<p>一个 GraphQL 服务是通过定义类型和类型上的字段来创建的，然后给每个类型上的每个字段提供解析函数。例如，一个 GraphQL 服务告诉我们当前登录用户是 me，这个用户的名称可能像这样：</p>
+<pre><code class="hljs js">type Query &#123;
+  me: User
+&#125;
+
+type User &#123;
+  id: ID
+  name: <span class="hljs-built_in">String</span>
+&#125;
+</code></pre>
+
+<p>一并的还有每个类型上字段的解析函数：</p>
+<pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Query_me</span>(<span class="hljs-params">request</span>) </span>&#123;
+  <span class="hljs-keyword">return</span> request.auth.user;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">User_name</span>(<span class="hljs-params">user</span>) </span>&#123;
+  <span class="hljs-keyword">return</span> user.getName();
+&#125;</code></pre>
+
+<p>一旦一个 GraphQL 服务运行起来（通常在 web 服务的一个 URL 上），它就能接收 GraphQL 查询，并验证和执行。接收到的查询首先会被检查确保它只引用了已定义的类型和字段，然后运行指定的解析函数来生成结果。</p>
+<p>例如这个查询：</p>
+<pre><code class="hljs js">&#123;
+  me &#123;
+    name
+  &#125;
+&#125;</code></pre>
+
+<p>会产生这样的JSON结果：</p>
+<pre><code class="hljs js">&#123;
+  <span class="hljs-string">&quot;me&quot;</span>: &#123;
+    <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Luke Skywalker&quot;</span>
+  &#125;
+&#125;</code></pre>
+
+<h1 id="字段（Fields）"><a href="#字段（Fields）" class="headerlink" title="字段（Fields）"></a>字段（Fields）</h1><p>简单而言，Fields 是关于请求对象上的特定字段。我们以一个非常简单的查询以及其结果为例：</p>
+<pre><code class="hljs js">&#123;
+  hero &#123;
+    name
+  &#125;
+&#125;
+
+&#123;
+  <span class="hljs-string">&quot;data&quot;</span>: &#123;
+    <span class="hljs-string">&quot;hero&quot;</span>: &#123;
+      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;R2-D2&quot;</span>
+    &#125;
+  &#125;
+&#125;
+</code></pre>
+
+<p>你立即就能发现，查询和其结果拥有几乎一样的结构。这是 GraphQL 最重要的特性，因<br>为这样一来，你就总是能得到你想要的数据，而服务器也准确地知道客户端请求的字段</p>
+<hr>
+<h2 id="对象类型查询"><a href="#对象类型查询" class="headerlink" title="对象类型查询"></a>对象类型查询</h2><p>在前一例子中，我们请求了我们主角的名字，返回了一个字符串类型（String），但是字段也能指代对象类型（Object）。这个时候，你可以对这个对象的字段进行次级选择（sub-selection）。GraphQL 查询能够遍历相关对象及其字段，使得客户端可以一次请求查询大量相关数据，而不像传统 REST 架构中那样需要多次往返查询。</p>
+<pre><code class="hljs js">&#123;
+  hero &#123;
+    name
+    # 查询可以有备注！
+    friends &#123;
+      name
+    &#125;
+  &#125;
+&#125;
+
+&#123;
+  <span class="hljs-string">&quot;data&quot;</span>: &#123;
+    <span class="hljs-string">&quot;hero&quot;</span>: &#123;
+      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;R2-D2&quot;</span>,
+      <span class="hljs-string">&quot;friends&quot;</span>: [
+        &#123;
+          <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Luke Skywalker&quot;</span>
+        &#125;,
+        &#123;
+          <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Han Solo&quot;</span>
+        &#125;,
+        &#123;
+          <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Leia Organa&quot;</span>
+        &#125;
+      ]
+    &#125;
+  &#125;
+&#125;</code></pre>
+
+<p>注意这个例子中，friends 返回了一个数组的项目，GraphQL 查询会同等看待单个项目或者一个列表的项目，然而我们可以通过 schema 所指示的内容来预测将会得到哪一种。</p>
+<h1 id="参数（Arguments）"><a href="#参数（Arguments）" class="headerlink" title="参数（Arguments）"></a>参数（Arguments）</h1><p>即使我们能做的仅仅是遍历对象及其字段，GraphQL 就已经是一个非常有用的数据查询语言了。但是当你加入给字段传递参数的能力时，事情会变得更加有趣。</p>
+<pre><code class="hljs ts">&#123;
+  human(id: <span class="hljs-string">&quot;1000&quot;</span>) &#123;
+    name
+    height
+  &#125;
+&#125;
+&#123;
+  <span class="hljs-string">&quot;data&quot;</span>: &#123;
+    <span class="hljs-string">&quot;human&quot;</span>: &#123;
+      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Luke Skywalker&quot;</span>,
+      <span class="hljs-string">&quot;height&quot;</span>: <span class="hljs-number">1.72</span>
+    &#125;
+  &#125;
+&#125;</code></pre>
+
+<p>在类似 REST 的系统中，你只能传递一组简单参数 —— 请求中的 query 参数和 URL 段。但是在 GraphQL 中，每一个字段和嵌套对象都能有自己的一组参数，从而使得 GraphQL 可以完美替代多次 API 获取请求。甚至你也可以给 标量（scalar）字段传递参数，用于实现服务端的一次转换，而不用每个客户端分别转换。</p>
+<pre><code class="hljs js">&#123;
+  human(id: <span class="hljs-string">&quot;1000&quot;</span>) &#123;
+    name
+    height(unit: FOOT)
+  &#125;
+&#125;
+&#123;
+  <span class="hljs-string">&quot;data&quot;</span>: &#123;
+    <span class="hljs-string">&quot;human&quot;</span>: &#123;
+      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Luke Skywalker&quot;</span>,
+      <span class="hljs-string">&quot;height&quot;</span>: <span class="hljs-number">5.6430448</span>
+    &#125;
+  &#125;
+&#125;
+</code></pre>
+
+<p>参数可以是多种不同的类型。上面例子中，我们使用了一个枚举类型，其代表了一个有限选项集合（本例中为长度单位，即是 METER 或者 FOOT）。GraphQL 自带一套默认类型，但是 GraphQL 服务器可以声明一套自己的定制类型，只要能序列化成你的传输格式即可。</p>
+<p><a target="_blank" rel="noopener" href="https://graphql.cn/learn/schema">更多的 GraphQL 类型系统</a></p>
+<h1 id="别名（Aliases）"><a href="#别名（Aliases）" class="headerlink" title="别名（Aliases）"></a>别名（Aliases）</h1><p>如果你眼睛够锐利，你可能已经发现，即便结果中的字段与查询中的字段能够匹配，但是因为他们并不包含参数，你就没法通过不同参数来查询相同字段。这便是为何你需要别名 —— 这可以让你重命名结果中的字段为任意你想到的名字。</p>
+<pre><code class="hljs clojure">&#123;
+  empireHero: hero(<span class="hljs-name">episode:</span> EMPIRE) &#123;
+    name
+  &#125;
+  jediHero: hero(<span class="hljs-name">episode:</span> JEDI) &#123;
+    name
+  &#125;
+&#125;
+
+&#123;
+  <span class="hljs-string">&quot;data&quot;</span>: &#123;
+    <span class="hljs-string">&quot;empireHero&quot;</span>: &#123;
+      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Luke Skywalker&quot;</span>
+    &#125;,
+    <span class="hljs-string">&quot;jediHero&quot;</span>: &#123;
+      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;R2-D2&quot;</span>
+    &#125;
+  &#125;
+&#125;
+&#123;
+  <span class="hljs-string">&quot;data&quot;</span>: &#123;
+    <span class="hljs-string">&quot;empireHero&quot;</span>: &#123;
+      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Luke Skywalker&quot;</span>
+    &#125;,
+    <span class="hljs-string">&quot;jediHero&quot;</span>: &#123;
+      <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;R2-D2&quot;</span>
+    &#125;
+  &#125;
+&#125;</code></pre>
+
+<h1 id="片段（Fragments）"><a href="#片段（Fragments）" class="headerlink" title="片段（Fragments）"></a>片段（Fragments）</h1><p>假设我们的 app 有比较复杂的页面，将正反派主角及其友军分为两拨。你立马就能想到对应的查询会变得复杂，因为我们需要将一些字段重复至少一次 —— 两方各一次以作比较。</p>
+<p>这就是为何 GraphQL 包含了称作片段的<strong>可复用单元</strong>。片段使你能够组织一组字段，然后在需要它们的的地方引入。下面例子展示了如何使用片段解决上述场景：</p>
+<h1 id="操作类型"><a href="#操作类型" class="headerlink" title="操作类型"></a>操作类型</h1><p>query、mutation、subscription</p>
+<h1 id="操作名称（Operation-name）"><a href="#操作名称（Operation-name）" class="headerlink" title="操作名称（Operation name）"></a>操作名称（Operation name）</h1><h1 id="变量（Variables）"><a href="#变量（Variables）" class="headerlink" title="变量（Variables）"></a>变量（Variables）</h1><h2 id="变量定义"><a href="#变量定义" class="headerlink" title="变量定义"></a>变量定义</h2><p>变量定义看上去像是上述查询中的 ($episode: Episode)。其工作方式跟类型语言中函数的参数定义一样。它以列出所有变量，变量前缀必须为 $，后跟其类型，本例中为 Episode。</p>
+<h2 id="默认变量"><a href="#默认变量" class="headerlink" title="默认变量"></a>默认变量</h2><p>可以通过在查询中的类型定义后面附带默认值的方式，将默认值赋给变量。</p>
+<h1 id="指令（Directives）"><a href="#指令（Directives）" class="headerlink" title="指令（Directives）"></a>指令（Directives）</h1><p>@include(if: Boolean)<br>@skip(if: Boolean)</p>
+<h1 id="变更（Mutations"><a href="#变更（Mutations" class="headerlink" title="变更（Mutations)"></a>变更（Mutations)</h1><p>GraphQL 的大部分讨论集中在数据获取，但是任何完整的数据平台也都需要一个改变服务端数据的方法。</p>
+<p>REST 中，任何请求都可能最后导致一些服务端副作用，但是约定上建议不要使用 GET 请求来修改数据。GraphQL 也是类似 —— 技术上而言，任何查询都可以被实现为导致数据写入。然而，建一个约定来规范任何导致写入的操作都应该显式通过变更（mutation）来发送。</p>
+<p>变更中的多个字段（Multiple fields in mutations）<br>一个变更也能包含多个字段，一如查询。查询和变更之间名称之外的一个重要区别是：</p>
+<p>查询字段时，是并行执行，而变更字段时，是线性执行，一个接着一个。</p>
+<p><strong>这意味着如果我们一个请求中发送了两个 incrementCredits 变更，第一个保证在第二个之前执行，以确保我们不会出现竞态。</strong></p>
+<h1 id="内联片段"><a href="#内联片段" class="headerlink" title="内联片段"></a>内联片段</h1><h1 id="元字段（Meta-fields）"><a href="#元字段（Meta-fields）" class="headerlink" title="元字段（Meta fields）"></a>元字段（Meta fields）</h1>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/graphql/">graphql</a>
+                    
+                      <a class="hover-with-bg" href="/tags/api/">api</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/09/27/%E5%BE%85Graphql-mesh/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">待Graphql-mesh</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/09/20/%E6%8F%92%E4%BB%B6%E5%8C%96%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6UmiJS/">
+                        <span class="hidden-mobile">插件化企业级前端框架UmiJS</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "GraphQL官方规范&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
