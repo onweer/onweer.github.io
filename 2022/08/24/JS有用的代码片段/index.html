@@ -16,21 +16,23 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="检查浏览器123const isBrowser &#x3D; () &#x3D;&gt; ![typeof window, typeof document].includes(&amp;#x27;undefined&amp;#x27;);isBrowser() &#x2F;&#x2F; true   if on isBrowserisBrowser() &#x2F;&#x2F; false  if we are on node js or any other enviro">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://example.com/2022/08/24/hello-world/index.html">
+<meta property="og:title" content="JS有用的代码片段">
+<meta property="og:url" content="http://example.com/2022/08/24/JS%E6%9C%89%E7%94%A8%E7%9A%84%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="检查浏览器123const isBrowser &#x3D; () &#x3D;&gt; ![typeof window, typeof document].includes(&amp;#x27;undefined&amp;#x27;);isBrowser() &#x2F;&#x2F; true   if on isBrowserisBrowser() &#x2F;&#x2F; false  if we are on node js or any other enviro">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-08-24T07:17:51.691Z">
-<meta property="article:modified_time" content="2022-08-24T07:17:51.691Z">
+<meta property="article:published_time" content="2022-08-24T08:47:16.000Z">
+<meta property="article:modified_time" content="2022-08-24T08:53:45.286Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Hello World - Hexo</title>
+  <title>JS有用的代码片段 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -195,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Hello World"></span>
+            <span id="subtitle" data-typed-text="JS有用的代码片段"></span>
           
         </div>
 
@@ -206,7 +208,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-08-24 15:17" pubdate>
+        <time datetime="2022-08-24 16:47" pubdate>
           August 24, 2022 pm
         </time>
       </span>
@@ -218,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          undefined words
+          1.4k words
         
       </span>
     
@@ -229,7 +231,7 @@
         
         
         
-          NaN mins
+          12 mins
         
       </span>
     
@@ -267,25 +269,28 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Hello World</h1>
+            <h1 style="display: none">JS有用的代码片段</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+                <h2 id="检查浏览器"><a href="#检查浏览器" class="headerlink" title="检查浏览器"></a>检查浏览器</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">isBrowser</span> = (<span class="hljs-params"></span>) =&gt; ![<span class="hljs-keyword">typeof</span> <span class="hljs-variable language_">window</span>, <span class="hljs-keyword">typeof</span> <span class="hljs-variable language_">document</span>].<span class="hljs-title function_">includes</span>(<span class="hljs-string">&#x27;undefined&#x27;</span>);<br><span class="hljs-title function_">isBrowser</span>() <span class="hljs-comment">// true   if on isBrowser</span><br><span class="hljs-title function_">isBrowser</span>() <span class="hljs-comment">// false  if we are on node js or any other environment</span><br></code></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h2 id="检查是否为数字"><a href="#检查是否为数字" class="headerlink" title="检查是否为数字"></a>检查是否为数字</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">isNumeric</span>(<span class="hljs-params">num</span>) &#123; <br>  <span class="hljs-keyword">return</span> !<span class="hljs-built_in">isNaN</span>(<span class="hljs-built_in">parseFloat</span>(num)) &amp;&amp; <span class="hljs-built_in">isFinite</span>(num); <br>&#125;<br><span class="hljs-title function_">isNumeric</span>(<span class="hljs-number">324</span>) <span class="hljs-comment">//true </span><br><span class="hljs-title function_">isNumeric</span>(<span class="hljs-string">&quot;Code&quot;</span>) <span class="hljs-comment">// false</span><br></code></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<h2 id="检查是否为字符串"><a href="#检查是否为字符串" class="headerlink" title="检查是否为字符串"></a>检查是否为字符串</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">isString</span> = val =&gt; <span class="hljs-keyword">typeof</span> val === <span class="hljs-string">&#x27;string&#x27;</span>;<br><span class="hljs-title function_">isString</span>(<span class="hljs-string">&#x27;hello world&#x27;</span>); <span class="hljs-comment">// true</span><br><span class="hljs-title function_">isString</span>(<span class="hljs-string">&#x27;1234&#x27;</span>); <span class="hljs-comment">// true</span><br><span class="hljs-title function_">isString</span>(<span class="hljs-number">345</span>); <span class="hljs-comment">// false</span><br></code></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h2 id="最大数"><a href="#最大数" class="headerlink" title="最大数"></a>最大数</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">maxN</span> = (<span class="hljs-params">arr, n = <span class="hljs-number">1</span></span>) =&gt; [...arr].<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> b - a).<span class="hljs-title function_">slice</span>(<span class="hljs-number">0</span>, n);<br><span class="hljs-title function_">maxN</span>([<span class="hljs-number">3</span>,<span class="hljs-number">8</span>,<span class="hljs-number">7</span>]) <span class="hljs-comment">// 8 </span><br><span class="hljs-title function_">maxN</span>([<span class="hljs-number">1</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">23</span>]) <span class="hljs-comment">// 23</span><br></code></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h2 id="从列表中随机"><a href="#从列表中随机" class="headerlink" title="从列表中随机"></a>从列表中随机</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">random</span> = arr =&gt; arr[<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() * arr.<span class="hljs-property">length</span>)];<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">random</span>([<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>])) <span class="hljs-comment">// 6 </span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">random</span>([<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-number">0</span>,<span class="hljs-number">6</span>])) <span class="hljs-comment">// 1</span><br></code></pre></td></tr></table></figure>
 
+<h2 id="范围生成器中的整数数组"><a href="#范围生成器中的整数数组" class="headerlink" title="范围生成器中的整数数组"></a>范围生成器中的整数数组</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">randomIntArrayInRange</span> = (<span class="hljs-params">min, max, n = <span class="hljs-number">1</span></span>) =&gt; <br>  <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>(&#123; <span class="hljs-attr">length</span>: n &#125;, <span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() * (max - min + <span class="hljs-number">1</span>)) + min);<br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">randomIntArrayInRange</span>(<span class="hljs-number">10</span>, <span class="hljs-number">15</span>, <span class="hljs-number">5</span>)); <span class="hljs-comment">// [ 14, 11, 15, 10, 13 ]</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="范围生成器中的随机整数"><a href="#范围生成器中的随机整数" class="headerlink" title="范围生成器中的随机整数"></a>范围生成器中的随机整数</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">randomInteger</span> = (<span class="hljs-params">min, max</span>) =&gt; <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() * (max - min + <span class="hljs-number">1</span>)) + min;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">randomInteger</span>(<span class="hljs-number">1</span>,<span class="hljs-number">10</span>)) <span class="hljs-comment">// 6 </span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">randomInteger</span>(<span class="hljs-number">1</span>,<span class="hljs-number">20</span>)) <span class="hljs-comment">// 8</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="获取类型"><a href="#获取类型" class="headerlink" title="获取类型"></a>获取类型</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">getType</span> = v =&gt; v === <span class="hljs-literal">undefined</span> ? <span class="hljs-string">&#x27;undefined&#x27;</span> : v === <span class="hljs-literal">null</span> ? <span class="hljs-string">&#x27;null&#x27;</span> : v.<span class="hljs-property">constructor</span>.<span class="hljs-property">name</span>.<span class="hljs-title function_">toLowerCase</span>();<br><span class="hljs-title function_">getType</span>([<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>]) <span class="hljs-comment">//array</span><br><span class="hljs-title function_">getType</span>(<span class="hljs-string">&quot;JavaScript&quot;</span>)  <span class="hljs-comment">//string</span><br><span class="hljs-title function_">getType</span>(<span class="hljs-literal">true</span>)  <span class="hljs-comment">//boolean</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="数组平均数"><a href="#数组平均数" class="headerlink" title="数组平均数"></a>数组平均数</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">average</span> = arr =&gt; arr.<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">acc, val</span>) =&gt;</span> acc + val, <span class="hljs-number">0</span>) / arr.<span class="hljs-property">length</span>;<br><br><span class="hljs-comment">// average([1,2,3]) -&gt; 2</span><br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -293,6 +298,15 @@
             <div>
               <div class="post-metas my-3">
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
+      
+        <a href="/tags/JavaScript/">#JavaScript</a>
+      
+    </div>
   
 </div>
 
@@ -302,8 +316,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Hello World</div>
-      <div>http://example.com/2022/08/24/hello-world/</div>
+      <div>JS有用的代码片段</div>
+      <div>http://example.com/2022/08/24/JS有用的代码片段/</div>
     </div>
     <div class="license-meta">
       
@@ -345,15 +359,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/08/24/JS%E6%9C%89%E7%94%A8%E7%9A%84%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/" title="JS有用的代码片段">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">JS有用的代码片段</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2022/08/24/hello-world/" title="Hello World">
+                        <span class="hidden-mobile">Hello World</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
