@@ -13,26 +13,27 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="Leo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="检查浏览器123const isBrowser &#x3D; () &#x3D;&gt; ![typeof window, typeof document].includes(&amp;#x27;undefined&amp;#x27;);isBrowser() &#x2F;&#x2F; true   if on isBrowserisBrowser() &#x2F;&#x2F; false  if we are on node js or any other enviro">
+    <meta name="description" content="box alignment 模块许多人开始关注 flexbox 的最初原因是在 flex 容器中能够很好的对齐其中的元素。flexbox 可以设置在其交叉轴以及主轴上的对齐属性。 这些属性最开始出现在 flexbox 规范中，现在已经成为Box Alignment 规范的一部分。这个规范详细说明了在所有布局中（不仅仅是 flexbox）对齐属性是如何起作用的。对齐属性用于设置元素对齐方式和沿轴的空">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS有用的代码片段">
-<meta property="og:url" content="http://example.com/2022/08/24/JS%E6%9C%89%E7%94%A8%E7%9A%84%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/index.html">
+<meta property="og:title" content="盒子对齐规范">
+<meta property="og:url" content="http://example.com/2022/08/25/%E7%9B%92%E5%AD%90%E5%AF%B9%E9%BD%90%E8%A7%84%E8%8C%83/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="检查浏览器123const isBrowser &#x3D; () &#x3D;&gt; ![typeof window, typeof document].includes(&amp;#x27;undefined&amp;#x27;);isBrowser() &#x2F;&#x2F; true   if on isBrowserisBrowser() &#x2F;&#x2F; false  if we are on node js or any other enviro">
+<meta property="og:description" content="box alignment 模块许多人开始关注 flexbox 的最初原因是在 flex 容器中能够很好的对齐其中的元素。flexbox 可以设置在其交叉轴以及主轴上的对齐属性。 这些属性最开始出现在 flexbox 规范中，现在已经成为Box Alignment 规范的一部分。这个规范详细说明了在所有布局中（不仅仅是 flexbox）对齐属性是如何起作用的。对齐属性用于设置元素对齐方式和沿轴的空">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-08-24T08:47:16.000Z">
-<meta property="article:modified_time" content="2022-08-24T08:53:45.286Z">
+<meta property="article:published_time" content="2022-08-25T06:35:25.000Z">
+<meta property="article:modified_time" content="2022-08-25T07:27:14.867Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="前端">
-<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="css">
+<meta property="article:tag" content="gap">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>JS有用的代码片段 - Hexo</title>
+  <title>盒子对齐规范 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -197,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="JS有用的代码片段"></span>
+            <span id="subtitle" data-typed-text="盒子对齐规范"></span>
           
         </div>
 
@@ -208,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-08-24 16:47" pubdate>
-          August 24, 2022 pm
+        <time datetime="2022-08-25 14:35" pubdate>
+          August 25, 2022 pm
         </time>
       </span>
     
@@ -220,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k words
+          1.8k words
         
       </span>
     
@@ -231,7 +232,7 @@
         
         
         
-          12 mins
+          15 mins
         
       </span>
     
@@ -269,28 +270,41 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">JS有用的代码片段</h1>
+            <h1 style="display: none">盒子对齐规范</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="检查浏览器"><a href="#检查浏览器" class="headerlink" title="检查浏览器"></a>检查浏览器</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">isBrowser</span> = (<span class="hljs-params"></span>) =&gt; ![<span class="hljs-keyword">typeof</span> <span class="hljs-variable language_">window</span>, <span class="hljs-keyword">typeof</span> <span class="hljs-variable language_">document</span>].<span class="hljs-title function_">includes</span>(<span class="hljs-string">&#x27;undefined&#x27;</span>);<br><span class="hljs-title function_">isBrowser</span>() <span class="hljs-comment">// true   if on isBrowser</span><br><span class="hljs-title function_">isBrowser</span>() <span class="hljs-comment">// false  if we are on node js or any other environment</span><br></code></pre></td></tr></table></figure>
+                <h1 id="box-alignment-模块"><a href="#box-alignment-模块" class="headerlink" title="box alignment 模块"></a>box alignment 模块</h1><p>许多人开始关注 flexbox 的最初原因是在 flex 容器中能够很好的对齐其中的元素。flexbox 可以设置在其交叉轴以及主轴上的对齐属性。</p>
+<p>这些属性最开始出现在 flexbox 规范中，现在已经成为<a target="_blank" rel="noopener" href="https://www.w3.org/TR/css-align-3/">Box Alignment 规范</a>的一部分。这个规范详细说明了在所有布局中（不仅仅是 flexbox）对齐属性是如何起作用的。对齐属性用于设置元素对齐方式和沿轴的空间分配。</p>
+<p>之所以在 flexbox 规范和 box alignment 模块规范中都有对对齐属性的详细描述，是为了确保 flexbox 规范的完成不会受 box alignment 模块规范的影响，因为后者需要详细说明所有的布局类型中的对齐方法。flexbox 规范中有一条注释指出将来一旦 Box Alignment Level 3 完成，它将会取代 flexbox 规范中的相关定义：</p>
+<h2 id="gap-属性"><a href="#gap-属性" class="headerlink" title="gap 属性"></a>gap 属性</h2><p>属性<code>row-gap</code> 和 <code>column-gap</code>，其简写为<code>gap</code>,近期添加到了盒子布局规范中。这些属性（名称为<code>grid-row-gap</code>, <code>grid-column-gap</code> and <code>grid-gap</code>）最初定义在 CSS 网格布局中。但是他们被重命名并移入盒子布局规范。这样的话，所有的布局方法都可以使用这些属性。</p>
+<p>不过在浏览器实现 Flex 的这些属性之前只能通过<code>margin</code> 来控制元素之间的间隙距离。</p>
+<h2 id="Write-Mode-写作模式"><a href="#Write-Mode-写作模式" class="headerlink" title="Write Mode 写作模式"></a>Write Mode 写作模式</h2><p>书写模式规范定义了以下<code>writing-mode</code>属性值，这些值用于更改块在页面上的布局方向，以匹配在特定书写模式下格式化内容时块的布局方向。</p>
+<ul>
+<li>horizontal-tb</li>
+<li>vertical-rl</li>
+<li>vertical-lr</li>
+<li>sideways-rl</li>
+<li>sideways-lr</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.box</span> &#123;<br>  <span class="hljs-attribute">display</span>: flex;<br>  <span class="hljs-attribute">writing-mode</span>: vertical-lr;<br>&#125;<br>    <br></code></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;box&quot;</span>&gt;</span><br>     <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>One<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>     <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Two<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>     <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Three<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
-<h2 id="检查是否为数字"><a href="#检查是否为数字" class="headerlink" title="检查是否为数字"></a>检查是否为数字</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">isNumeric</span>(<span class="hljs-params">num</span>) &#123; <br>  <span class="hljs-keyword">return</span> !<span class="hljs-built_in">isNaN</span>(<span class="hljs-built_in">parseFloat</span>(num)) &amp;&amp; <span class="hljs-built_in">isFinite</span>(num); <br>&#125;<br><span class="hljs-title function_">isNumeric</span>(<span class="hljs-number">324</span>) <span class="hljs-comment">//true </span><br><span class="hljs-title function_">isNumeric</span>(<span class="hljs-string">&quot;Code&quot;</span>) <span class="hljs-comment">// false</span><br></code></pre></td></tr></table></figure>
+<h2 id="Flexbox-和布局方式"><a href="#Flexbox-和布局方式" class="headerlink" title="Flexbox 和布局方式"></a>Flexbox 和布局方式</h2><p>flex会创建BFC</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs css"><br><span class="hljs-selector-class">.box</span>&gt;* &#123;<br>    <span class="hljs-attribute">float</span>: left;<br>&#125;<br><br><span class="hljs-selector-class">.box</span> &#123;<br>  <span class="hljs-attribute">display</span>: flex;<br>&#125;<br>    <br></code></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;box&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>One<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Two<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Three<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>      <br></code></pre></td></tr></table></figure>
 
-<h2 id="检查是否为字符串"><a href="#检查是否为字符串" class="headerlink" title="检查是否为字符串"></a>检查是否为字符串</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">isString</span> = val =&gt; <span class="hljs-keyword">typeof</span> val === <span class="hljs-string">&#x27;string&#x27;</span>;<br><span class="hljs-title function_">isString</span>(<span class="hljs-string">&#x27;hello world&#x27;</span>); <span class="hljs-comment">// true</span><br><span class="hljs-title function_">isString</span>(<span class="hljs-string">&#x27;1234&#x27;</span>); <span class="hljs-comment">// true</span><br><span class="hljs-title function_">isString</span>(<span class="hljs-number">345</span>); <span class="hljs-comment">// false</span><br></code></pre></td></tr></table></figure>
+<h2 id="Flexbox-和网格布局"><a href="#Flexbox-和网格布局" class="headerlink" title="Flexbox 和网格布局"></a>Flexbox 和网格布局</h2><p>CSS Grid Layout和 Flexbox 通常以相同的方式覆盖其他方法。但是，您可能希望使用 flexbox 作为网格布局的后备，因为在旧浏览器中对 flexbox 有更好的支持。</p>
+<p>这种方法效果很好。如果弹性项目成为网格项目，则flex可能已分配给子元素的属性将被忽略。</p>
+<p>在 Grid Layout 中，您对容器进行大部分尺寸规范，设置轨道，然后将项目放入其中。在 flexbox 中，当您创建一个 flex 容器并在该级别设置方向时，对项目大小的任何控制都需要在项目本身上进行。</p>
+<h2 id="Flexbox-和显示：内容"><a href="#Flexbox-和显示：内容" class="headerlink" title="Flexbox 和显示：内容"></a>Flexbox 和显示：内容</h2><p>该属性的contents值display是规范中描述的新值，如下所示：</p>
+<blockquote>
+<p>“元素本身不会生成任何框，但它的子元素和伪元素仍然照常生成框。出于框生成和布局的目的，必须将元素视为已被文档树中的子元素和伪元素替换。”</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.box</span> &#123;<br>    <span class="hljs-attribute">display</span>: flex;<br>&#125;<br><br><span class="hljs-selector-class">.nested</span> &#123;<br>    <span class="hljs-attribute">background-color</span>: orange;<br>    <span class="hljs-attribute">display</span>: contents;<br>&#125;<br>    <br></code></pre></td></tr></table></figure>
 
-<h2 id="最大数"><a href="#最大数" class="headerlink" title="最大数"></a>最大数</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">maxN</span> = (<span class="hljs-params">arr, n = <span class="hljs-number">1</span></span>) =&gt; [...arr].<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> b - a).<span class="hljs-title function_">slice</span>(<span class="hljs-number">0</span>, n);<br><span class="hljs-title function_">maxN</span>([<span class="hljs-number">3</span>,<span class="hljs-number">8</span>,<span class="hljs-number">7</span>]) <span class="hljs-comment">// 8 </span><br><span class="hljs-title function_">maxN</span>([<span class="hljs-number">1</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">23</span>]) <span class="hljs-comment">// 23</span><br></code></pre></td></tr></table></figure>
-
-<h2 id="从列表中随机"><a href="#从列表中随机" class="headerlink" title="从列表中随机"></a>从列表中随机</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">random</span> = arr =&gt; arr[<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() * arr.<span class="hljs-property">length</span>)];<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">random</span>([<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>])) <span class="hljs-comment">// 6 </span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">random</span>([<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-number">0</span>,<span class="hljs-number">6</span>])) <span class="hljs-comment">// 1</span><br></code></pre></td></tr></table></figure>
-
-<h2 id="范围生成器中的整数数组"><a href="#范围生成器中的整数数组" class="headerlink" title="范围生成器中的整数数组"></a>范围生成器中的整数数组</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">randomIntArrayInRange</span> = (<span class="hljs-params">min, max, n = <span class="hljs-number">1</span></span>) =&gt; <br>  <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>(&#123; <span class="hljs-attr">length</span>: n &#125;, <span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() * (max - min + <span class="hljs-number">1</span>)) + min);<br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">randomIntArrayInRange</span>(<span class="hljs-number">10</span>, <span class="hljs-number">15</span>, <span class="hljs-number">5</span>)); <span class="hljs-comment">// [ 14, 11, 15, 10, 13 ]</span><br></code></pre></td></tr></table></figure>
-
-<h2 id="范围生成器中的随机整数"><a href="#范围生成器中的随机整数" class="headerlink" title="范围生成器中的随机整数"></a>范围生成器中的随机整数</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">randomInteger</span> = (<span class="hljs-params">min, max</span>) =&gt; <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() * (max - min + <span class="hljs-number">1</span>)) + min;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">randomInteger</span>(<span class="hljs-number">1</span>,<span class="hljs-number">10</span>)) <span class="hljs-comment">// 6 </span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">randomInteger</span>(<span class="hljs-number">1</span>,<span class="hljs-number">20</span>)) <span class="hljs-comment">// 8</span><br></code></pre></td></tr></table></figure>
-
-<h2 id="获取类型"><a href="#获取类型" class="headerlink" title="获取类型"></a>获取类型</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">getType</span> = v =&gt; v === <span class="hljs-literal">undefined</span> ? <span class="hljs-string">&#x27;undefined&#x27;</span> : v === <span class="hljs-literal">null</span> ? <span class="hljs-string">&#x27;null&#x27;</span> : v.<span class="hljs-property">constructor</span>.<span class="hljs-property">name</span>.<span class="hljs-title function_">toLowerCase</span>();<br><span class="hljs-title function_">getType</span>([<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>]) <span class="hljs-comment">//array</span><br><span class="hljs-title function_">getType</span>(<span class="hljs-string">&quot;JavaScript&quot;</span>)  <span class="hljs-comment">//string</span><br><span class="hljs-title function_">getType</span>(<span class="hljs-literal">true</span>)  <span class="hljs-comment">//boolean</span><br></code></pre></td></tr></table></figure>
-
-<h2 id="数组平均数"><a href="#数组平均数" class="headerlink" title="数组平均数"></a>数组平均数</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">average</span> = arr =&gt; arr.<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">acc, val</span>) =&gt;</span> acc + val, <span class="hljs-number">0</span>) / arr.<span class="hljs-property">length</span>;<br><br><span class="hljs-comment">// average([1,2,3]) -&gt; 2</span><br></code></pre></td></tr></table></figure>
+<h2 id="CSS属性"><a href="#CSS属性" class="headerlink" title="CSS属性"></a>CSS属性</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs text">flex<br>flex-basis<br>flex-direction<br>flex-flow<br>flex-grow<br>flex-shrink<br>flex-wrap<br>order<br><br>align-content<br>align-items<br>align-self<br>justify-content<br>place-content<br>row-gap 行间隙<br>column-gap 列间隙<br>gap 行和列间隙，该属性是row-gap和column-gap的简写<br><br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -304,7 +318,9 @@
       
         <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
       
-        <a href="/tags/JavaScript/">#JavaScript</a>
+        <a href="/tags/css/">#css</a>
+      
+        <a href="/tags/gap/">#gap</a>
       
     </div>
   
@@ -316,20 +332,20 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>JS有用的代码片段</div>
-      <div>http://example.com/2022/08/24/JS有用的代码片段/</div>
+      <div>盒子对齐规范</div>
+      <div>http://example.com/2022/08/25/盒子对齐规范/</div>
     </div>
     <div class="license-meta">
       
         <div class="license-meta-item">
           <div>Author</div>
-          <div>John Doe</div>
+          <div>Leo</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>August 24, 2022</div>
+          <div>August 25, 2022</div>
         </div>
       
       
@@ -359,9 +375,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/08/24/flex%E5%B8%83%E5%B1%80/" title="flex布局">
+                      <a href="/2022/08/25/CSS%E7%90%86%E8%A7%A3%E6%9C%AC%E8%B4%A8/" title="CSS理解本质">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">flex布局</span>
+                        <span class="hidden-mobile">CSS理解本质</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -369,8 +385,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/24/hello-world/" title="Hello World">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2022/08/24/flex%E5%B8%83%E5%B1%80/" title="flex布局">
+                        <span class="hidden-mobile">flex布局</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -16,23 +16,23 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="检查浏览器123const isBrowser &#x3D; () &#x3D;&gt; ![typeof window, typeof document].includes(&amp;#x27;undefined&amp;#x27;);isBrowser() &#x2F;&#x2F; true   if on isBrowserisBrowser() &#x2F;&#x2F; false  if we are on node js or any other enviro">
+    <meta name="description" content="选择器列表如果你有多个使用相同样式的 CSS 选择器，那么这些单独的选择器可以被混编为一个“选择器列表”，这样，规则就可以应用到所有的单个选择器上了。例如，如果我的h1和.special类有相同的 CSS，那么我可以把它们写成两个分开的规则。 1234567h1 &amp;#123;  color: blue;&amp;#125;.special &amp;#123;  color: blue;&amp;#125;  我也可以将">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JS有用的代码片段">
-<meta property="og:url" content="http://example.com/2022/08/24/JS%E6%9C%89%E7%94%A8%E7%9A%84%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/index.html">
+<meta property="og:title" content="CSS选择器">
+<meta property="og:url" content="http://example.com/2022/08/25/CSS%E9%80%89%E6%8B%A9%E5%99%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="检查浏览器123const isBrowser &#x3D; () &#x3D;&gt; ![typeof window, typeof document].includes(&amp;#x27;undefined&amp;#x27;);isBrowser() &#x2F;&#x2F; true   if on isBrowserisBrowser() &#x2F;&#x2F; false  if we are on node js or any other enviro">
+<meta property="og:description" content="选择器列表如果你有多个使用相同样式的 CSS 选择器，那么这些单独的选择器可以被混编为一个“选择器列表”，这样，规则就可以应用到所有的单个选择器上了。例如，如果我的h1和.special类有相同的 CSS，那么我可以把它们写成两个分开的规则。 1234567h1 &amp;#123;  color: blue;&amp;#125;.special &amp;#123;  color: blue;&amp;#125;  我也可以将">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-08-24T08:47:16.000Z">
-<meta property="article:modified_time" content="2022-08-24T08:53:45.286Z">
+<meta property="article:published_time" content="2022-08-25T10:11:27.000Z">
+<meta property="article:modified_time" content="2022-08-25T10:15:50.923Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="前端">
-<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="css">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>JS有用的代码片段 - Hexo</title>
+  <title>CSS选择器 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -197,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="JS有用的代码片段"></span>
+            <span id="subtitle" data-typed-text="CSS选择器"></span>
           
         </div>
 
@@ -208,8 +208,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-08-24 16:47" pubdate>
-          August 24, 2022 pm
+        <time datetime="2022-08-25 18:11" pubdate>
+          August 25, 2022 pm
         </time>
       </span>
     
@@ -220,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k words
+          533 words
         
       </span>
     
@@ -231,7 +231,7 @@
         
         
         
-          12 mins
+          5 mins
         
       </span>
     
@@ -269,28 +269,33 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">JS有用的代码片段</h1>
+            <h1 style="display: none">CSS选择器</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="检查浏览器"><a href="#检查浏览器" class="headerlink" title="检查浏览器"></a>检查浏览器</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">isBrowser</span> = (<span class="hljs-params"></span>) =&gt; ![<span class="hljs-keyword">typeof</span> <span class="hljs-variable language_">window</span>, <span class="hljs-keyword">typeof</span> <span class="hljs-variable language_">document</span>].<span class="hljs-title function_">includes</span>(<span class="hljs-string">&#x27;undefined&#x27;</span>);<br><span class="hljs-title function_">isBrowser</span>() <span class="hljs-comment">// true   if on isBrowser</span><br><span class="hljs-title function_">isBrowser</span>() <span class="hljs-comment">// false  if we are on node js or any other environment</span><br></code></pre></td></tr></table></figure>
+                <h1 id="选择器列表"><a href="#选择器列表" class="headerlink" title="选择器列表"></a>选择器列表</h1><p>如果你有多个使用相同样式的 CSS 选择器，那么这些单独的选择器可以被混编为一个“选择器列表”，这样，规则就可以应用到所有的单个选择器上了。例如，如果我的h1和.special类有相同的 CSS，那么我可以把它们写成两个分开的规则。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">h1</span> &#123;<br>  <span class="hljs-attribute">color</span>: blue;<br>&#125;<br><br><span class="hljs-selector-class">.special</span> &#123;<br>  <span class="hljs-attribute">color</span>: blue;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="检查是否为数字"><a href="#检查是否为数字" class="headerlink" title="检查是否为数字"></a>检查是否为数字</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">isNumeric</span>(<span class="hljs-params">num</span>) &#123; <br>  <span class="hljs-keyword">return</span> !<span class="hljs-built_in">isNaN</span>(<span class="hljs-built_in">parseFloat</span>(num)) &amp;&amp; <span class="hljs-built_in">isFinite</span>(num); <br>&#125;<br><span class="hljs-title function_">isNumeric</span>(<span class="hljs-number">324</span>) <span class="hljs-comment">//true </span><br><span class="hljs-title function_">isNumeric</span>(<span class="hljs-string">&quot;Code&quot;</span>) <span class="hljs-comment">// false</span><br></code></pre></td></tr></table></figure>
+<p>我也可以将它们组合起来，在它们之间加上一个逗号，变为选择器列表。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">h1</span>, <span class="hljs-selector-class">.special</span> &#123;<br><span class="hljs-attribute">color</span>: blue;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="检查是否为字符串"><a href="#检查是否为字符串" class="headerlink" title="检查是否为字符串"></a>检查是否为字符串</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">isString</span> = val =&gt; <span class="hljs-keyword">typeof</span> val === <span class="hljs-string">&#x27;string&#x27;</span>;<br><span class="hljs-title function_">isString</span>(<span class="hljs-string">&#x27;hello world&#x27;</span>); <span class="hljs-comment">// true</span><br><span class="hljs-title function_">isString</span>(<span class="hljs-string">&#x27;1234&#x27;</span>); <span class="hljs-comment">// true</span><br><span class="hljs-title function_">isString</span>(<span class="hljs-number">345</span>); <span class="hljs-comment">// false</span><br></code></pre></td></tr></table></figure>
+<h1 id="选择器的种类"><a href="#选择器的种类" class="headerlink" title="选择器的种类"></a>选择器的种类</h1><p>有几组不同的选择器，知道了需要哪种选择器，你会更容易正确使用它们。在本文的子篇中，我们将会来更详细地看下不同种类的选择器。</p>
+<p>类型、类和 ID 选择器<br>这个选择器组，第一个是指向了所有 HTML 元素<h1>。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">h1</span> &#123; &#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="最大数"><a href="#最大数" class="headerlink" title="最大数"></a>最大数</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">maxN</span> = (<span class="hljs-params">arr, n = <span class="hljs-number">1</span></span>) =&gt; [...arr].<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> b - a).<span class="hljs-title function_">slice</span>(<span class="hljs-number">0</span>, n);<br><span class="hljs-title function_">maxN</span>([<span class="hljs-number">3</span>,<span class="hljs-number">8</span>,<span class="hljs-number">7</span>]) <span class="hljs-comment">// 8 </span><br><span class="hljs-title function_">maxN</span>([<span class="hljs-number">1</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">23</span>]) <span class="hljs-comment">// 23</span><br></code></pre></td></tr></table></figure>
+<p>它也包含了一个 class 的选择器：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.box</span> &#123; &#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="从列表中随机"><a href="#从列表中随机" class="headerlink" title="从列表中随机"></a>从列表中随机</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">random</span> = arr =&gt; arr[<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() * arr.<span class="hljs-property">length</span>)];<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">random</span>([<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>])) <span class="hljs-comment">// 6 </span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">random</span>([<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-number">0</span>,<span class="hljs-number">6</span>])) <span class="hljs-comment">// 1</span><br></code></pre></td></tr></table></figure>
+<p>亦或，一个 id 选择器：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-id">#unique</span> &#123; &#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="范围生成器中的整数数组"><a href="#范围生成器中的整数数组" class="headerlink" title="范围生成器中的整数数组"></a>范围生成器中的整数数组</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">randomIntArrayInRange</span> = (<span class="hljs-params">min, max, n = <span class="hljs-number">1</span></span>) =&gt; <br>  <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>(&#123; <span class="hljs-attr">length</span>: n &#125;, <span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() * (max - min + <span class="hljs-number">1</span>)) + min);<br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">randomIntArrayInRange</span>(<span class="hljs-number">10</span>, <span class="hljs-number">15</span>, <span class="hljs-number">5</span>)); <span class="hljs-comment">// [ 14, 11, 15, 10, 13 ]</span><br></code></pre></td></tr></table></figure>
+<h2 id="标签属性选择器"><a href="#标签属性选择器" class="headerlink" title="标签属性选择器"></a>标签属性选择器</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">a</span><span class="hljs-selector-attr">[title]</span> &#123; &#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="范围生成器中的随机整数"><a href="#范围生成器中的随机整数" class="headerlink" title="范围生成器中的随机整数"></a>范围生成器中的随机整数</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">randomInteger</span> = (<span class="hljs-params">min, max</span>) =&gt; <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() * (max - min + <span class="hljs-number">1</span>)) + min;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">randomInteger</span>(<span class="hljs-number">1</span>,<span class="hljs-number">10</span>)) <span class="hljs-comment">// 6 </span><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">randomInteger</span>(<span class="hljs-number">1</span>,<span class="hljs-number">20</span>)) <span class="hljs-comment">// 8</span><br></code></pre></td></tr></table></figure>
+<p>或者根据一个有特定值的标签属性是否存在来选择：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">a</span><span class="hljs-selector-attr">[href=<span class="hljs-string">&quot;https://example.com&quot;</span>]</span> &#123; &#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="获取类型"><a href="#获取类型" class="headerlink" title="获取类型"></a>获取类型</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">getType</span> = v =&gt; v === <span class="hljs-literal">undefined</span> ? <span class="hljs-string">&#x27;undefined&#x27;</span> : v === <span class="hljs-literal">null</span> ? <span class="hljs-string">&#x27;null&#x27;</span> : v.<span class="hljs-property">constructor</span>.<span class="hljs-property">name</span>.<span class="hljs-title function_">toLowerCase</span>();<br><span class="hljs-title function_">getType</span>([<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>]) <span class="hljs-comment">//array</span><br><span class="hljs-title function_">getType</span>(<span class="hljs-string">&quot;JavaScript&quot;</span>)  <span class="hljs-comment">//string</span><br><span class="hljs-title function_">getType</span>(<span class="hljs-literal">true</span>)  <span class="hljs-comment">//boolean</span><br></code></pre></td></tr></table></figure>
 
-<h2 id="数组平均数"><a href="#数组平均数" class="headerlink" title="数组平均数"></a>数组平均数</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">average</span> = arr =&gt; arr.<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">acc, val</span>) =&gt;</span> acc + val, <span class="hljs-number">0</span>) / arr.<span class="hljs-property">length</span>;<br><br><span class="hljs-comment">// average([1,2,3]) -&gt; 2</span><br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -304,7 +309,7 @@
       
         <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
       
-        <a href="/tags/JavaScript/">#JavaScript</a>
+        <a href="/tags/css/">#css</a>
       
     </div>
   
@@ -316,8 +321,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>JS有用的代码片段</div>
-      <div>http://example.com/2022/08/24/JS有用的代码片段/</div>
+      <div>CSS选择器</div>
+      <div>http://example.com/2022/08/25/CSS选择器/</div>
     </div>
     <div class="license-meta">
       
@@ -329,7 +334,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>August 24, 2022</div>
+          <div>August 25, 2022</div>
         </div>
       
       
@@ -359,18 +364,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/08/24/flex%E5%B8%83%E5%B1%80/" title="flex布局">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">flex布局</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/24/hello-world/" title="Hello World">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2022/08/25/CSS%E7%90%86%E8%A7%A3%E6%9C%AC%E8%B4%A8/" title="CSS理解本质">
+                        <span class="hidden-mobile">CSS理解本质</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
