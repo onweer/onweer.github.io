@@ -16,15 +16,15 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="选择器列表如果你有多个使用相同样式的 CSS 选择器，那么这些单独的选择器可以被混编为一个“选择器列表”，这样，规则就可以应用到所有的单个选择器上了。例如，如果我的h1和.special类有相同的 CSS，那么我可以把它们写成两个分开的规则。 1234567h1 &amp;#123;  color: blue;&amp;#125;.special &amp;#123;  color: blue;&amp;#125;  我也可以将">
+    <meta name="description" content="在 CSS 中，所有的元素都被一个个的“盒子（box）”包围着，理解这些“盒子”的基本原理，是我们使用 CSS 实现准确布局、处理元素排列的关键。 块级盒子（Block box） 和 内联盒子（Inline box）在 CSS 中我们广泛地使用两种“盒子” —— 块级盒子 (block box) 和 内联盒子 (inline box)。这两种盒子会在页面流（page flow）和元素之间的关系方面">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CSS选择器">
-<meta property="og:url" content="http://example.com/2022/08/25/CSS%E9%80%89%E6%8B%A9%E5%99%A8/index.html">
+<meta property="og:title" content="盒模型">
+<meta property="og:url" content="http://example.com/2022/08/25/%E7%9B%92%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="选择器列表如果你有多个使用相同样式的 CSS 选择器，那么这些单独的选择器可以被混编为一个“选择器列表”，这样，规则就可以应用到所有的单个选择器上了。例如，如果我的h1和.special类有相同的 CSS，那么我可以把它们写成两个分开的规则。 1234567h1 &amp;#123;  color: blue;&amp;#125;.special &amp;#123;  color: blue;&amp;#125;  我也可以将">
+<meta property="og:description" content="在 CSS 中，所有的元素都被一个个的“盒子（box）”包围着，理解这些“盒子”的基本原理，是我们使用 CSS 实现准确布局、处理元素排列的关键。 块级盒子（Block box） 和 内联盒子（Inline box）在 CSS 中我们广泛地使用两种“盒子” —— 块级盒子 (block box) 和 内联盒子 (inline box)。这两种盒子会在页面流（page flow）和元素之间的关系方面">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-08-25T10:11:27.000Z">
-<meta property="article:modified_time" content="2022-08-25T10:18:12.862Z">
+<meta property="article:published_time" content="2022-08-25T10:23:40.000Z">
+<meta property="article:modified_time" content="2022-08-25T10:33:30.469Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="前端">
 <meta property="article:tag" content="css">
@@ -32,7 +32,7 @@
   
   
   
-  <title>CSS选择器 - Hexo</title>
+  <title>盒模型 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -197,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="CSS选择器"></span>
+            <span id="subtitle" data-typed-text="盒模型"></span>
           
         </div>
 
@@ -208,7 +208,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-08-25 18:11" pubdate>
+        <time datetime="2022-08-25 18:23" pubdate>
           August 25, 2022 pm
         </time>
       </span>
@@ -220,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k words
+          546 words
         
       </span>
     
@@ -231,7 +231,7 @@
         
         
         
-          10 mins
+          5 mins
         
       </span>
     
@@ -269,43 +269,30 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">CSS选择器</h1>
+            <h1 style="display: none">盒模型</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="选择器列表"><a href="#选择器列表" class="headerlink" title="选择器列表"></a>选择器列表</h1><p>如果你有多个使用相同样式的 CSS 选择器，那么这些单独的选择器可以被混编为一个“选择器列表”，这样，规则就可以应用到所有的单个选择器上了。例如，如果我的h1和.special类有相同的 CSS，那么我可以把它们写成两个分开的规则。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">h1</span> &#123;<br>  <span class="hljs-attribute">color</span>: blue;<br>&#125;<br><br><span class="hljs-selector-class">.special</span> &#123;<br>  <span class="hljs-attribute">color</span>: blue;<br>&#125;<br></code></pre></td></tr></table></figure>
+                <p>在 CSS 中，所有的元素都被一个个的“盒子（box）”包围着，理解这些“盒子”的基本原理，是我们使用 CSS 实现准确布局、处理元素排列的关键。</p>
+<h1 id="块级盒子（Block-box）-和-内联盒子（Inline-box）"><a href="#块级盒子（Block-box）-和-内联盒子（Inline-box）" class="headerlink" title="块级盒子（Block box） 和 内联盒子（Inline box）"></a>块级盒子（Block box） 和 内联盒子（Inline box）</h1><p>在 CSS 中我们广泛地使用两种“盒子” —— <strong>块级盒子</strong> (block box) 和 <strong>内联盒子</strong> (inline box)。这两种盒子会在<strong>页面流</strong>（page flow）和元素之间的关系方面表现出不同的行为：</p>
+<p><strong>一个被定义成块级的（block）盒子会表现出以下行为：</strong></p>
+<ul>
+<li>盒子会在内联的方向上扩展并占据父容器在该方向上的所有可用空间，在绝大数情况下意味着盒子会和父容器一样宽</li>
+<li>每个盒子都会换行</li>
+<li>width 和 height 属性可以发挥作用</li>
+<li>内边距（padding）, 外边距（margin）和 边框（border）会将其他元素从当前盒子周围“推开”</li>
+</ul>
+<p>除非特殊指定，诸如标题 (<h1>等) 和段落 (<p>) 默认情况下都是块级的盒子。</p>
+<p><strong>如果一个盒子对外显示为 inline，那么他的行为如下：</strong></p>
+<ul>
+<li>盒子不会产生换行。</li>
+<li>width 和 height 属性将不起作用。</li>
+<li>垂直方向的内边距、外边距以及边框会被应用但是不会把其他处于 inline 状态的盒子推开。</li>
+<li>水平方向的内边距、外边距以及边框会被应用且会把其他处于 inline 状态的盒子推开。</li>
+</ul>
+<p>用做链接的 <a> 元素、 <span>、 <em> 以及 <strong> 都是默认处于 inline 状态的。</p>
 
-<p>我也可以将它们组合起来，在它们之间加上一个逗号，变为选择器列表。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">h1</span>, <span class="hljs-selector-class">.special</span> &#123;<br><span class="hljs-attribute">color</span>: blue;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h1 id="选择器的种类"><a href="#选择器的种类" class="headerlink" title="选择器的种类"></a>选择器的种类</h1><p>有几组不同的选择器，知道了需要哪种选择器，你会更容易正确使用它们。在本文的子篇中，我们将会来更详细地看下不同种类的选择器。</p>
-<p>类型、类和 ID 选择器<br>这个选择器组，第一个是指向了所有 HTML 元素<h1>。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">h1</span> &#123; &#125;<br></code></pre></td></tr></table></figure>
-
-<p>它也包含了一个 class 的选择器：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.box</span> &#123; &#125;<br></code></pre></td></tr></table></figure>
-
-<p>亦或，一个 id 选择器：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-id">#unique</span> &#123; &#125;<br></code></pre></td></tr></table></figure>
-
-<h2 id="标签属性选择器"><a href="#标签属性选择器" class="headerlink" title="标签属性选择器"></a>标签属性选择器</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">a</span><span class="hljs-selector-attr">[title]</span> &#123; &#125;<br></code></pre></td></tr></table></figure>
-
-<p>或者根据一个有特定值的标签属性是否存在来选择：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">a</span><span class="hljs-selector-attr">[href=<span class="hljs-string">&quot;https://example.com&quot;</span>]</span> &#123; &#125;<br></code></pre></td></tr></table></figure>
-
-<h2 id="伪类与伪元素"><a href="#伪类与伪元素" class="headerlink" title="伪类与伪元素"></a>伪类与伪元素</h2><p>这组选择器包含了伪类，用来样式化一个元素的特定状态。例如:hover伪类会在鼠标指针悬浮到一个元素上的时候选择这个元素：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:hover</span> &#123; &#125;<br></code></pre></td></tr></table></figure>
-
-
-<p>它还可以包含了伪元素，选择一个元素的某个部分而不是元素自己。例如，::first-line是会选择一个元素（下面的情况中是<p>）中的第一行，类似<span>包在了第一个被格式化的行外面，然后选择这个<span>。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">p</span><span class="hljs-selector-pseudo">::first-line</span> &#123; &#125;<br></code></pre></td></tr></table></figure>
-
-<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><p>最后一组选择器可以将其他选择器组合起来，更复杂的选择元素。下面的示例用运算符（&gt;）选择了<article>元素的初代子元素。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-tag">article</span> &gt; <span class="hljs-selector-tag">p</span> &#123; &#125;<br></code></pre></td></tr></table></figure>
-
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs less">选择器	示例	学习 <span class="hljs-selector-tag">CSS</span> 的教程<br>类型选择器	<span class="hljs-selector-tag">h1</span> &#123; &#125;	类型选择器<br>通配选择器	* &#123; &#125;	通配选择器<br>类选择器	<span class="hljs-selector-class">.box</span> &#123; &#125;	类选择器<br><span class="hljs-selector-tag">ID</span> 选择器	<span class="hljs-selector-id">#unique</span> &#123; &#125;	<span class="hljs-selector-tag">ID</span> 选择器<br>标签属性选择器	<span class="hljs-selector-tag">a</span><span class="hljs-selector-attr">[title]</span> &#123; &#125;	标签属性选择器<br>伪类选择器	<span class="hljs-selector-tag">p</span><span class="hljs-selector-pseudo">:first</span><span class="hljs-selector-tag">-child</span> &#123; &#125;	伪类<br>伪元素选择器	<span class="hljs-selector-tag">p</span><span class="hljs-selector-pseudo">::first-line</span> &#123; &#125;	伪元素<br>后代选择器	<span class="hljs-selector-tag">article</span> <span class="hljs-selector-tag">p</span>	后代运算符<br>子代选择器	<span class="hljs-selector-tag">article</span> &gt; <span class="hljs-selector-tag">p</span>	子代选择器<br>相邻兄弟选择器	<span class="hljs-selector-tag">h1</span> + <span class="hljs-selector-tag">p</span>	相邻兄弟<br>通用兄弟选择器	<span class="hljs-selector-tag">h1</span> ~ <span class="hljs-selector-tag">p</span>	通用兄弟<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -331,8 +318,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>CSS选择器</div>
-      <div>http://example.com/2022/08/25/CSS选择器/</div>
+      <div>盒模型</div>
+      <div>http://example.com/2022/08/25/盒模型/</div>
     </div>
     <div class="license-meta">
       
@@ -374,18 +361,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/08/25/%E7%9B%92%E6%A8%A1%E5%9E%8B/" title="盒模型">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">盒模型</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/25/CSS%E7%90%86%E8%A7%A3%E6%9C%AC%E8%B4%A8/" title="CSS理解本质">
-                        <span class="hidden-mobile">CSS理解本质</span>
+                      <a href="/2022/08/25/CSS%E9%80%89%E6%8B%A9%E5%99%A8/" title="CSS选择器">
+                        <span class="hidden-mobile">CSS选择器</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>盒模型</title>
+    <link href="/2022/08/25/%E7%9B%92%E6%A8%A1%E5%9E%8B/"/>
+    <url>/2022/08/25/%E7%9B%92%E6%A8%A1%E5%9E%8B/</url>
+    
+    <content type="html"><![CDATA[<p>在 CSS 中，所有的元素都被一个个的“盒子（box）”包围着，理解这些“盒子”的基本原理，是我们使用 CSS 实现准确布局、处理元素排列的关键。</p><h1 id="块级盒子（Block-box）-和-内联盒子（Inline-box）"><a href="#块级盒子（Block-box）-和-内联盒子（Inline-box）" class="headerlink" title="块级盒子（Block box） 和 内联盒子（Inline box）"></a>块级盒子（Block box） 和 内联盒子（Inline box）</h1><p>在 CSS 中我们广泛地使用两种“盒子” —— <strong>块级盒子</strong> (block box) 和 <strong>内联盒子</strong> (inline box)。这两种盒子会在<strong>页面流</strong>（page flow）和元素之间的关系方面表现出不同的行为：</p><p><strong>一个被定义成块级的（block）盒子会表现出以下行为：</strong></p><ul><li>盒子会在内联的方向上扩展并占据父容器在该方向上的所有可用空间，在绝大数情况下意味着盒子会和父容器一样宽</li><li>每个盒子都会换行</li><li>width 和 height 属性可以发挥作用</li><li>内边距（padding）, 外边距（margin）和 边框（border）会将其他元素从当前盒子周围“推开”</li></ul><p>除非特殊指定，诸如标题 (<h1>等) 和段落 (<p>) 默认情况下都是块级的盒子。</p><p><strong>如果一个盒子对外显示为 inline，那么他的行为如下：</strong></p><ul><li>盒子不会产生换行。</li><li>width 和 height 属性将不起作用。</li><li>垂直方向的内边距、外边距以及边框会被应用但是不会把其他处于 inline 状态的盒子推开。</li><li>水平方向的内边距、外边距以及边框会被应用且会把其他处于 inline 状态的盒子推开。</li></ul><p>用做链接的 <a> 元素、 <span>、 <em> 以及 <strong> 都是默认处于 inline 状态的。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>前端</tag>
+      
+      <tag>css</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>CSS选择器</title>
     <link href="/2022/08/25/CSS%E9%80%89%E6%8B%A9%E5%99%A8/"/>
     <url>/2022/08/25/CSS%E9%80%89%E6%8B%A9%E5%99%A8/</url>
