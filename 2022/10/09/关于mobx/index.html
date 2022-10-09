@@ -16,16 +16,16 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="关于 mobxMobX 是一个简单、可扩展且经过实战考验的状态管理解决方案,。 MobX 是一个独立的库，但大多数人将它与 React 一起使用 The core idea">
+    <meta name="description" content="关于 mobxMobX 是一个简单、可扩展且经过实战考验的状态管理解决方案,。 MobX 是一个独立的库，但大多数人将它与 React 一起使用 The core idea状态是每个应用的核心。如果你想打造出漏洞百出又难以管理的应用程序，那么搞出不一致的状态或与徘徊着的局部变量不同步的状态就是最快的方法。 因此，许多状态管理解决方案试图限制您可以修改状态的方式，例如通过使状态不可变。但这带来了新的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于mobx">
 <meta property="og:url" content="http://example.com/2022/10/09/%E5%85%B3%E4%BA%8Emobx/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="关于 mobxMobX 是一个简单、可扩展且经过实战考验的状态管理解决方案,。 MobX 是一个独立的库，但大多数人将它与 React 一起使用 The core idea">
+<meta property="og:description" content="关于 mobxMobX 是一个简单、可扩展且经过实战考验的状态管理解决方案,。 MobX 是一个独立的库，但大多数人将它与 React 一起使用 The core idea状态是每个应用的核心。如果你想打造出漏洞百出又难以管理的应用程序，那么搞出不一致的状态或与徘徊着的局部变量不同步的状态就是最快的方法。 因此，许多状态管理解决方案试图限制您可以修改状态的方式，例如通过使状态不可变。但这带来了新的">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/img/mobx/mobx-flow1.png">
 <meta property="article:published_time" content="2022-10-09T03:23:38.000Z">
-<meta property="article:modified_time" content="2022-10-09T03:27:04.629Z">
+<meta property="article:modified_time" content="2022-10-09T06:33:49.920Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="mobx">
 <meta property="article:tag" content="mobx6">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          77 words
+          588 words
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          1 mins
+          5 mins
         
       </span>
     
@@ -277,7 +277,15 @@
               <div class="markdown-body">
                 
                 <h1 id="关于-mobx"><a href="#关于-mobx" class="headerlink" title="关于 mobx"></a>关于 mobx</h1><p>MobX 是一个简单、可扩展且经过实战考验的状态管理解决方案,。 MobX 是一个独立的库，但大多数人将它与 React 一起使用</p>
-<h2 id="The-core-idea"><a href="#The-core-idea" class="headerlink" title="The core idea"></a>The core idea</h2><p><img src="/img/mobx/mobx-flow1.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="The-core-idea"><a href="#The-core-idea" class="headerlink" title="The core idea"></a>The core idea</h2><p>状态是每个应用的核心。如果你想打造出漏洞百出又难以管理的应用程序，那么搞出不一致的状态或与徘徊着的局部变量不同步的状态就是最快的方法。</p>
+<p>因此，许多状态管理解决方案试图限制您可以修改状态的方式，例如通过使状态不可变。但这带来了新的问题；数据需要规范化，引用完整性不再得到保证，并且几乎不可能使用强大的概念，如类，</p>
+<p><img src="/img/mobx/mobx-flow1.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li>首先是 应用状态。就是那些呈图状结构分布、组成你应用状态模型的对象、数组、原始值和引用。这些值是你应用中的“单元格”。</li>
+<li>其次是 derivations。也就是任何可以从你的应用状态中被自动计算出来的值。这些 derivations ——或者计算值——可以是简单的值，比如未完成待办的个数；也可以是复杂的值，比如你待办清单的 HTML 视觉表示。</li>
+<li>Reactions 与 derivations 非常相似。但主要的区别在于这些函数不会返回值，而会自动执行一些任务。通常这些任务与 I/O 有关。它们会确保 DOM 的更新或者在对的时间自动发出网络请求。</li>
+<li>最后是 actions。actions 就是所有会修改状态的代码。MobX 会让所有由于你的 actions 引发的应用状态的改变都被全部 derivations 和 reactions 同步而顺畅地自动处理掉。</li>
+</ol>
 
                 
               </div>
@@ -346,6 +354,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/10/09/mobx-observable-state/" title="mobx-observable-state">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">mobx-observable-state</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
