@@ -16,24 +16,27 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="模拟 Mock 的计算属性Mock 的计算属性都是不可读写的，不能直接修改。 12const store &#x3D; new Store();store.computedX &#x3D; 1; &#x2F;&#x2F; error  需要使用jest.spyOn模拟get函数 12jest.spyOn(storeClass, &amp;#x27;computedProperty&amp;#x27;, &amp;#x27;get&amp;#x27;).mockRetu">
+    <meta name="description" content="如果在 mobx 计算属性中，使用 action 会发生什么情况 1:如果 computed 属性 执行的 action，不会让 computed 再次计算，就不会有问题  情况 2: 如果 computed 属性 执行的 action，会让 computed 再次计算，就会进入死循环">
 <meta property="og:type" content="article">
-<meta property="og:title" content="模拟mobx-computed-property计算属性">
-<meta property="og:url" content="http://example.com/2022/09/29/%E6%A8%A1%E6%8B%9Fmobx-computed-property%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7/index.html">
+<meta property="og:title" content="mobx计算属性使用action的问题">
+<meta property="og:url" content="http://example.com/2022/09/29/%E5%BC%80%E5%8F%91%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/mobx%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E4%BD%BF%E7%94%A8action%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="模拟 Mock 的计算属性Mock 的计算属性都是不可读写的，不能直接修改。 12const store &#x3D; new Store();store.computedX &#x3D; 1; &#x2F;&#x2F; error  需要使用jest.spyOn模拟get函数 12jest.spyOn(storeClass, &amp;#x27;computedProperty&amp;#x27;, &amp;#x27;get&amp;#x27;).mockRetu">
+<meta property="og:description" content="如果在 mobx 计算属性中，使用 action 会发生什么情况 1:如果 computed 属性 执行的 action，不会让 computed 再次计算，就不会有问题  情况 2: 如果 computed 属性 执行的 action，会让 computed 再次计算，就会进入死循环">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-09-29T09:07:14.000Z">
-<meta property="article:modified_time" content="2022-09-29T09:10:31.756Z">
+<meta property="og:image" content="http://example.com/img/mobx/mobx%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E4%BD%BF%E7%94%A8action%E7%9A%84%E9%97%AE%E9%A2%981.png">
+<meta property="og:image" content="http://example.com/img/mobx/mobx%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E4%BD%BF%E7%94%A8action%E7%9A%84%E9%97%AE%E9%A2%982.png">
+<meta property="article:published_time" content="2022-09-29T09:24:12.000Z">
+<meta property="article:modified_time" content="2022-10-09T03:22:18.837Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="jest">
 <meta property="article:tag" content="mobx">
-<meta property="article:tag" content="test">
+<meta property="article:tag" content="bug">
+<meta property="article:tag" content="mobx action">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/mobx/mobx%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E4%BD%BF%E7%94%A8action%E7%9A%84%E9%97%AE%E9%A2%981.png">
   
   
   
-  <title>模拟mobx-computed-property计算属性 - Hexo</title>
+  <title>mobx计算属性使用action的问题 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="模拟mobx-computed-property计算属性"></span>
+            <span id="subtitle" data-typed-text="mobx计算属性使用action的问题"></span>
           
         </div>
 
@@ -209,7 +212,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-09-29 17:07" pubdate>
+        <time datetime="2022-09-29 17:24" pubdate>
           September 29, 2022 pm
         </time>
       </span>
@@ -221,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          195 words
+          122 words
         
       </span>
     
@@ -270,16 +273,16 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">模拟mobx-computed-property计算属性</h1>
+            <h1 style="display: none">mobx计算属性使用action的问题</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="模拟-Mock-的计算属性"><a href="#模拟-Mock-的计算属性" class="headerlink" title="模拟 Mock 的计算属性"></a>模拟 Mock 的计算属性</h1><p>Mock 的计算属性都是不可读写的，不能直接修改。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> store = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Store</span>();<br>store.<span class="hljs-property">computedX</span> = <span class="hljs-number">1</span>; <span class="hljs-comment">// error</span><br></code></pre></td></tr></table></figure>
-
-<p>需要使用<code>jest.spyOn</code>模拟<code>get</code>函数</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js">jest.<span class="hljs-title function_">spyOn</span>(storeClass, <span class="hljs-string">&#x27;computedProperty&#x27;</span>, <span class="hljs-string">&#x27;get&#x27;</span>).<span class="hljs-title function_">mockReturnValue</span>(...)<br><br></code></pre></td></tr></table></figure>
+                <h1 id="如果在-mobx-计算属性中，使用-action-会发生什么"><a href="#如果在-mobx-计算属性中，使用-action-会发生什么" class="headerlink" title="如果在 mobx 计算属性中，使用 action 会发生什么"></a>如果在 mobx 计算属性中，使用 action 会发生什么</h1><p>情况 1:<br>如果 computed 属性 执行的 action，不会让 computed 再次计算，就不会有问题</p>
+<p><img src="/img/mobx/mobx%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E4%BD%BF%E7%94%A8action%E7%9A%84%E9%97%AE%E9%A2%981.png" srcset="/img/loading.gif" lazyload></p>
+<p>情况 2:</p>
+<p>如果 computed 属性 执行的 action，会让 computed 再次计算，就会进入死循环</p>
+<p><img src="/img/mobx/mobx%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E4%BD%BF%E7%94%A8action%E7%9A%84%E9%97%AE%E9%A2%982.png" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>
@@ -292,11 +295,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/jest/">#jest</a>
-      
         <a href="/tags/mobx/">#mobx</a>
       
-        <a href="/tags/test/">#test</a>
+        <a href="/tags/bug/">#bug</a>
+      
+        <a href="/tags/mobx-action/">#mobx action</a>
       
     </div>
   
@@ -308,8 +311,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>模拟mobx-computed-property计算属性</div>
-      <div>http://example.com/2022/09/29/模拟mobx-computed-property计算属性/</div>
+      <div>mobx计算属性使用action的问题</div>
+      <div>http://example.com/2022/09/29/开发中遇到的问题记录/mobx计算属性使用action的问题/</div>
     </div>
     <div class="license-meta">
       
@@ -351,9 +354,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/09/29/%E5%BC%80%E5%8F%91%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/mobx%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E4%BD%BF%E7%94%A8action%E7%9A%84%E9%97%AE%E9%A2%98/" title="mobx计算属性使用action的问题">
+                      <a href="/2022/10/09/%E5%85%B3%E4%BA%8Emobx/" title="关于mobx">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">mobx计算属性使用action的问题</span>
+                        <span class="hidden-mobile">关于mobx</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -361,8 +364,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/09/27/2022%E5%B9%B4%E4%B8%8B%E5%8D%8A%E5%B9%B4%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" title="2022年下半年职业规划">
-                        <span class="hidden-mobile">2022年下半年职业规划</span>
+                      <a href="/2022/09/29/%E6%A8%A1%E6%8B%9Fmobx-computed-property%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7/" title="模拟mobx-computed-property计算属性">
+                        <span class="hidden-mobile">模拟mobx-computed-property计算属性</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

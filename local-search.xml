@@ -4,6 +4,50 @@
   
   
   <entry>
+    <title>关于mobx</title>
+    <link href="/2022/10/09/%E5%85%B3%E4%BA%8Emobx/"/>
+    <url>/2022/10/09/%E5%85%B3%E4%BA%8Emobx/</url>
+    
+    <content type="html"><![CDATA[<h1 id="关于-mobx"><a href="#关于-mobx" class="headerlink" title="关于 mobx"></a>关于 mobx</h1><p>MobX 是一个简单、可扩展且经过实战考验的状态管理解决方案,。 MobX 是一个独立的库，但大多数人将它与 React 一起使用</p><h2 id="The-core-idea"><a href="#The-core-idea" class="headerlink" title="The core idea"></a>The core idea</h2><p><img src="/img/mobx/mobx-flow1.png"></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>mobx</tag>
+      
+      <tag>mobx6</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>mobx计算属性使用action的问题</title>
+    <link href="/2022/09/29/%E5%BC%80%E5%8F%91%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/mobx%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E4%BD%BF%E7%94%A8action%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <url>/2022/09/29/%E5%BC%80%E5%8F%91%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/mobx%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E4%BD%BF%E7%94%A8action%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    
+    <content type="html"><![CDATA[<h1 id="如果在-mobx-计算属性中，使用-action-会发生什么"><a href="#如果在-mobx-计算属性中，使用-action-会发生什么" class="headerlink" title="如果在 mobx 计算属性中，使用 action 会发生什么"></a>如果在 mobx 计算属性中，使用 action 会发生什么</h1><p>情况 1:<br>如果 computed 属性 执行的 action，不会让 computed 再次计算，就不会有问题</p><p><img src="/img/mobx/mobx%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E4%BD%BF%E7%94%A8action%E7%9A%84%E9%97%AE%E9%A2%981.png"></p><p>情况 2:</p><p>如果 computed 属性 执行的 action，会让 computed 再次计算，就会进入死循环</p><p><img src="/img/mobx/mobx%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E4%BD%BF%E7%94%A8action%E7%9A%84%E9%97%AE%E9%A2%982.png"></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>mobx</tag>
+      
+      <tag>bug</tag>
+      
+      <tag>mobx action</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>模拟mobx-computed-property计算属性</title>
     <link href="/2022/09/29/%E6%A8%A1%E6%8B%9Fmobx-computed-property%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7/"/>
     <url>/2022/09/29/%E6%A8%A1%E6%8B%9Fmobx-computed-property%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7/</url>
