@@ -16,19 +16,21 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="创建可观察的状态 属性 对象 数组 Maps Sets  都可以被转化为可观察的对象，使得对象可观察的基本方法是使用 makeObservable 为每个属性指定一个注解。 最重要的注解如下：">
+    <meta name="description" content="创建可观察的状态 属性 对象 数组 Maps Sets  都可以被转化为可观察的对象，使得对象可观察的基本方法是使用 makeObservable 为每个属性指定一个注解。 最重要的注解如下：  observable 定义一个存储 state 的可追踪字段。 action 将一个方法标记为可以修改 state 的 action。 computed 标记一个可以由 state 派生出新的值并且缓存其">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mobx-observable-state">
 <meta property="og:url" content="http://example.com/2022/10/09/mobx-observable-state/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="创建可观察的状态 属性 对象 数组 Maps Sets  都可以被转化为可观察的对象，使得对象可观察的基本方法是使用 makeObservable 为每个属性指定一个注解。 最重要的注解如下：">
+<meta property="og:description" content="创建可观察的状态 属性 对象 数组 Maps Sets  都可以被转化为可观察的对象，使得对象可观察的基本方法是使用 makeObservable 为每个属性指定一个注解。 最重要的注解如下：  observable 定义一个存储 state 的可追踪字段。 action 将一个方法标记为可以修改 state 的 action。 computed 标记一个可以由 state 派生出新的值并且缓存其">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/mobx/mobx-state1.png">
 <meta property="article:published_time" content="2022-10-09T06:34:26.000Z">
-<meta property="article:modified_time" content="2022-10-09T06:35:39.633Z">
+<meta property="article:modified_time" content="2022-10-09T07:05:06.413Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="mobx">
 <meta property="article:tag" content="observable">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/mobx/mobx-state1.png">
   
   
   
@@ -220,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          86 words
+          3.5k words
         
       </span>
     
@@ -231,7 +233,7 @@
         
         
         
-          1 mins
+          30 mins
         
       </span>
     
@@ -282,6 +284,54 @@
 <li>Sets</li>
 </ul>
 <p>都可以被转化为可观察的对象，使得对象可观察的基本方法是使用 makeObservable 为每个属性指定一个注解。 最重要的注解如下：</p>
+<ul>
+<li>observable 定义一个存储 state 的可追踪字段。</li>
+<li>action 将一个方法标记为可以修改 state 的 action。</li>
+<li>computed 标记一个可以由 state 派生出新的值并且缓存其输出的 getter。</li>
+</ul>
+<p>像数组，Maps 和 Sets 这样的集合都将被自动转化为可观察对象。</p>
+<blockquote>
+<p>makeObservable<br>用法：</p>
+</blockquote>
+<p><code>makeObservable(target, annotations?, options?)</code></p>
+<p>这个函数可以捕获已经存在的对象属性并且使得它们可观察。任何 JavaScript 对象（包括类的实例）都可以作为 target 被传递给这个函数。</p>
+<p>一般情况下，makeObservable 是在类的构造函数中调用的，并且它的第一个参数是 this</p>
+<p>annotations 参数将会为每一个成员映射 注解。需要注意的是，当使用 装饰器 时，annotations 参数将会被忽略。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; makeObservable, observable, computed, action, flow &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;mobx&quot;</span>;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Doubler</span> &#123;<br>  value;<br><br>  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">value</span>) &#123;<br>    <span class="hljs-title function_">makeObservable</span>(<span class="hljs-variable language_">this</span>, &#123;<br>      <span class="hljs-attr">value</span>: observable,<br>      <span class="hljs-attr">double</span>: computed,<br>      <span class="hljs-attr">increment</span>: action,<br>      <span class="hljs-attr">fetch</span>: flow,<br>    &#125;);<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">value</span> = value;<br>  &#125;<br><br>  <span class="hljs-keyword">get</span> <span class="hljs-title function_">double</span>() &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">value</span> * <span class="hljs-number">2</span>;<br>  &#125;<br><br>  <span class="hljs-title function_">increment</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">value</span>++;<br>  &#125;<br><br>  *<span class="hljs-title function_">fetch</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">yield</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&quot;/api/value&quot;</span>);<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">value</span> = response.<span class="hljs-title function_">json</span>();<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>makeAutoObservable</code><br>用法：</p>
+</blockquote>
+<p><code>makeAutoObservable(target, overrides?, options?)</code></p>
+<p>makeAutoObservable 就像是加强版的 makeObservable，在默认情况下它将推断所有的属性。你仍然可以使用 overrides 重写某些注解的默认行为。 具体来说，false 可用于从自动处理中排除一个属性或方法。 查看上面的代码分页获取示例。 与使用 makeObservable 相比，makeAutoObservable 函数更紧凑，也更容易维护，因为新成员不需要显式地提及。 然而，makeAutoObservable 不能被用于带有 super 的类或 子类。</p>
+<p>推断规则：</p>
+<ul>
+<li>所有 自有 属性都成为 observable。</li>
+<li>所有 getters 都成为 computed。</li>
+<li>所有 setters 都成为 action。</li>
+<li>所有 prototype 中的 functions 都成为 autoAction。</li>
+<li>所有 prototype 中的 generator functions 都成为 flow。（需要注意，generators 函数在某些编译器配置中无法被检测到，如果 flow 没有正常运行，请务必明确地指定 flow 注解。）</li>
+<li>在 overrides 参数中标记为 false 的成员将不会被添加注解。例如，将其用于像标识符这样的只读字段。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; makeAutoObservable &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;mobx&quot;</span>;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">createDoubler</span>(<span class="hljs-params">value</span>) &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-title function_">makeAutoObservable</span>(&#123;<br>    value,<br>    <span class="hljs-keyword">get</span> <span class="hljs-title function_">double</span>() &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">value</span> * <span class="hljs-number">2</span>;<br>    &#125;,<br>    <span class="hljs-title function_">increment</span>(<span class="hljs-params"></span>) &#123;<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">value</span>++;<br>    &#125;,<br>  &#125;);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>observable</p>
+</blockquote>
+<p><code>observable(source, overrides?, options?)</code></p>
+<p>observable 注解可以作为一个函数进行调用，从而一次性将整个对象变成可观察的。 source 对象将会被克隆并且所有的成员都将会成为可观察的，类似于 makeAutoObservable 做的那样。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; observable, autorun &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;mobx&quot;</span>;<br><br><span class="hljs-keyword">const</span> todos = <span class="hljs-title function_">observable</span>([<br>  &#123; <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Spoil tea&quot;</span>, <span class="hljs-attr">completed</span>: <span class="hljs-literal">true</span> &#125;,<br>  &#123; <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Make coffee&quot;</span>, <span class="hljs-attr">completed</span>: <span class="hljs-literal">false</span> &#125;,<br>]);<br><br><span class="hljs-title function_">autorun</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<br>    <span class="hljs-string">&quot;Remaining:&quot;</span>,<br>    todos<br>      .<span class="hljs-title function_">filter</span>(<span class="hljs-function">(<span class="hljs-params">todo</span>) =&gt;</span> !todo.<span class="hljs-property">completed</span>)<br>      .<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">todo</span>) =&gt;</span> todo.<span class="hljs-property">title</span>)<br>      .<span class="hljs-title function_">join</span>(<span class="hljs-string">&quot;, &quot;</span>)<br>  );<br>&#125;);<br><span class="hljs-comment">// 打印: &#x27;Remaining: Make coffee&#x27;</span><br><br>todos[<span class="hljs-number">0</span>].<span class="hljs-property">completed</span> = <span class="hljs-literal">false</span>;<br><span class="hljs-comment">// 打印: &#x27;Remaining: Spoil tea, Make coffee&#x27;</span><br><br>todos[<span class="hljs-number">2</span>] = &#123; <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;Take a nap&quot;</span>, <span class="hljs-attr">completed</span>: <span class="hljs-literal">false</span> &#125;;<br><span class="hljs-comment">// 打印: &#x27;Remaining: Spoil tea, Make coffee, Take a nap&#x27;</span><br><br>todos.<span class="hljs-title function_">shift</span>();<br><span class="hljs-comment">// 打印: &#x27;Remaining: Make coffee, Take a nap&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="observable-和-makeObservable-区别"><a href="#observable-和-makeObservable-区别" class="headerlink" title="observable 和 makeObservable 区别"></a>observable 和 makeObservable 区别</h1><p>make(Auto)Observable 和 observable 之间最主要的区别在于，make(Auto)Observable 会修改你作为第一个参数传入的对象，而 observable 会创建一个可观察的 副本 对象。</p>
+<p>第二个区别是，observable 会创建一个 Proxy 对象，以便能够在你将该对象当作动态查询映射使用时捕获将要添加的属性。 如果你想把一个对象转化为可观察对象，而这个对象具有一个常规结构，其中所有的成员都是事先已知的，那么我们建议使用 makeObservable，因为非代理对象的速度稍快一些，而且它们在调试器和 console.log 中更容易检查。</p>
+<p>因此，make(Auto)Observable 推荐在工厂函数中使用。 值得一提的是，可以将 { proxy: false } 作为 option 传入 observable 获取非代理副本。</p>
+<h1 id="可用的注解"><a href="#可用的注解" class="headerlink" title="可用的注解"></a>可用的注解</h1><p><img src="/img/mobx/mobx-state1.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="option"><a href="#option" class="headerlink" title="option"></a>option</h2><p>Options {🚀}<br>上面的 API 都有一个可选的 options 参数，该参数是一个对象，支持以下选项：</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs vbnet"><span class="hljs-symbol">autoBind:</span> <span class="hljs-literal">true</span> 默认使用 action.bound/flow.bound，而不使用 action/flow。不影响被显式注释过的成员。<br><span class="hljs-symbol">deep:</span> <span class="hljs-literal">false</span> 默认使用 observable.ref，而不使用 observable。不影响被显式注释过的成员。<br><span class="hljs-symbol">name:</span> &lt;<span class="hljs-type">string</span>&gt; 为对象提供一个调试名称，该名称将被打印在错误消息和 reflection API 中。<br><span class="hljs-symbol">proxy:</span> <span class="hljs-literal">false</span> 迫使 observable(thing) 使用非 proxy 的实现。如果对象的结构不会随着时间变化，那么这就是一个很好的选择，因为非代理对象更容易调试并且速度更快。请参见 避免代理。<br></code></pre></td></tr></table></figure>
+
+<h1 id="将-observable-转换回普通的-JavaScript-集合"><a href="#将-observable-转换回普通的-JavaScript-集合" class="headerlink" title="将 observable 转换回普通的 JavaScript 集合"></a>将 observable 转换回普通的 JavaScript 集合</h1><p>有时有必要将可观察的数据结构转换回原生的数据结构。 例如，将可观察对象传入一个无法跟踪可观察对象的 React 组件时，或者想要获取一个不会再被更改的副本时。</p>
+<p>要进行浅转换，用常用的 JavaScript 操作就可以做到：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> plainObject = &#123; ...observableObject &#125;;<br><span class="hljs-keyword">const</span> plainArray = observableArray.<span class="hljs-title function_">slice</span>();<br><span class="hljs-keyword">const</span> plainMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>(observableMap);<br></code></pre></td></tr></table></figure>
 
                 
               </div>
