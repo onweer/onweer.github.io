@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/img/mobx/mobx-state1.png">
 <meta property="article:published_time" content="2022-10-09T06:34:26.000Z">
-<meta property="article:modified_time" content="2022-10-09T07:05:06.413Z">
+<meta property="article:modified_time" content="2022-10-10T02:19:35.840Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="mobx">
 <meta property="article:tag" content="observable">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.5k words
+          3.6k words
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          30 mins
+          31 mins
         
       </span>
     
@@ -332,6 +332,8 @@
 <h1 id="将-observable-转换回普通的-JavaScript-集合"><a href="#将-observable-转换回普通的-JavaScript-集合" class="headerlink" title="将 observable 转换回普通的 JavaScript 集合"></a>将 observable 转换回普通的 JavaScript 集合</h1><p>有时有必要将可观察的数据结构转换回原生的数据结构。 例如，将可观察对象传入一个无法跟踪可观察对象的 React 组件时，或者想要获取一个不会再被更改的副本时。</p>
 <p>要进行浅转换，用常用的 JavaScript 操作就可以做到：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> plainObject = &#123; ...observableObject &#125;;<br><span class="hljs-keyword">const</span> plainArray = observableArray.<span class="hljs-title function_">slice</span>();<br><span class="hljs-keyword">const</span> plainMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>(observableMap);<br></code></pre></td></tr></table></figure>
+
+<p>要将数据树递归地转换为普通对象，可使用 toJS 工具函数。 对于类，建议实现一个 toJSON() 方法，因为这样会被 JSON.stringify 识别出来。</p>
 
                 
               </div>
