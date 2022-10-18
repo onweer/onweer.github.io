@@ -1,0 +1,649 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Stores官网说的 Domain Store 在我们的项目中其实就是 RootStore. Stores 可以在任何 Flux 架构中找到，并且可以和 MVC 模式中的 controllers 做类比。 Stores 的主要职责是将 逻辑（logic） 和 状态(state) 从组件中移至一个可独立测试的单元，并能同时在前后端的 JavaScript 中使用。 大多数应用都可以从定义这两个 st">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mobx-如何定义store-最佳实践">
+<meta property="og:url" content="http://example.com/2022/10/11/mobx-%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89store-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Stores官网说的 Domain Store 在我们的项目中其实就是 RootStore. Stores 可以在任何 Flux 架构中找到，并且可以和 MVC 模式中的 controllers 做类比。 Stores 的主要职责是将 逻辑（logic） 和 状态(state) 从组件中移至一个可独立测试的单元，并能同时在前后端的 JavaScript 中使用。 大多数应用都可以从定义这两个 st">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-10-11T03:25:29.000Z">
+<meta property="article:modified_time" content="2022-10-12T03:40:54.658Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="mobx">
+<meta property="article:tag" content="mobx-store">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>mobx-如何定义store-最佳实践 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>I&#39;ll be there for you. I&#39;ll be loud for you.</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="mobx-如何定义store-最佳实践"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-10-11 11:25" pubdate>
+          October 11, 2022 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.2k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          44 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">mobx-如何定义store-最佳实践</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Stores"><a href="#Stores" class="headerlink" title="Stores"></a>Stores</h1><p>官网说的 Domain Store 在我们的项目中其实就是 RootStore.</p>
+<p>Stores 可以在任何 Flux 架构中找到，并且可以和 MVC 模式中的 controllers 做类比。 Stores 的主要职责是将 逻辑（logic） 和 状态(state) 从组件中移至一个可独立测试的单元，并能同时在前后端的 JavaScript 中使用。</p>
+<p>大多数应用都可以从定义这两个 stores 中得到好处：一个用于 Domain 状态，另一个用于 UI 状态。</p>
+<p>区分这两类的好处是：你可以<strong>跨前后端重用</strong>和测试 领域状态，并且可以很好地在其他应用中重用它。</p>
+<h1 id="Domain-Store"><a href="#Domain-Store" class="headerlink" title="Domain Store"></a>Domain Store</h1><p>你的应用可以包含一个或多个 <code>domain stores</code>。 这些 stores 存储着应用的所有数据。</p>
+<ol>
+<li>domain store 应该和应用中的业务概念一一对应。</li>
+<li>一个 store 通常被组织成一个树状结构，里面有多个 domain 对象。</li>
+</ol>
+<p>举例来说：你的产品对应一个 domain store，订单和订单线对应另一个。根据经验：如果两个东西之间是包含关系，它们通常应该在一个 store 里。 因此，store 只是在管理 domain 对象。</p>
+<h2 id="Store-的职责"><a href="#Store-的职责" class="headerlink" title="Store 的职责:"></a>Store 的职责:</h2><ul>
+<li>实例化领域对象，确保领域对象知道它们所属的 store。</li>
+<li>确保每个领域对象只有一个实例。 同一个用户、订单或者待办事项不应该在内存中存储两次。 这样，你可以可以安全地使用引用，并确保正在查看的实例是最新的，而无需解析引用。 这一点在调试的时候十分快速、简单、方便。</li>
+<li>提供后端集成，当需要时存储数据。</li>
+<li>如果从后端接收到更新，则更新现有实例。</li>
+<li>为应用提供一个独立、通用、可测试的组件。</li>
+<li>要确保 store 是可测试的并且可以在服务端运行，你可能需要将实际的 websocket / http 请求移到单独的对象中，以便你可以抽象出通信层。</li>
+<li>Store 应该只有一个实例。</li>
+</ul>
+<h1 id="Domain-Store-1"><a href="#Domain-Store-1" class="headerlink" title="Domain Store"></a>Domain Store</h1><p>领域对象可以直接引用其他 store 中的领域对象。</p>
+<p>请记住：我们想让我们的操作和视图尽可能的简单，需要管理引用和自己做垃圾回收可能是一种退步。 与 Redux 等许多 Flux 架构不同，MobX 不需要对你的数据进行标准化处理，这使得业务规则、操作和用户界面这些在构建应用时 本质上 最复杂的部分变得简单得多。</p>
+<p>domain store 示例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; makeAutoObservable, autorun, runInAction &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;mobx&quot;</span>;<br><span class="hljs-keyword">import</span> uuid <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;node-uuid&quot;</span>;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TodoStore</span> &#123;<br>  authorStore;<br>  transportLayer;<br>  todos = [];<br>  isLoading = <span class="hljs-literal">true</span>;<br><br>  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">transportLayer, authorStore</span>) &#123;<br>    <span class="hljs-title function_">makeAutoObservable</span>(<span class="hljs-variable language_">this</span>);<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">authorStore</span> = authorStore; <span class="hljs-comment">// 可以提供 author 的 store</span><br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">transportLayer</span> = transportLayer; <span class="hljs-comment">// 可以发起服务端请求的东西</span><br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">transportLayer</span>.<span class="hljs-title function_">onReceiveTodoUpdate</span>(<span class="hljs-function">(<span class="hljs-params">updatedTodo</span>) =&gt;</span><br>      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">updateTodoFromServer</span>(updatedTodo)<br>    );<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">loadTodos</span>();<br>  &#125;<br><br>  <span class="hljs-comment">// 从服务端拉取所有的 todo 数据</span><br>  <span class="hljs-title function_">loadTodos</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">isLoading</span> = <span class="hljs-literal">true</span>;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">transportLayer</span>.<span class="hljs-title function_">fetchTodos</span>().<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">fetchedTodos</span>) =&gt;</span> &#123;<br>      <span class="hljs-title function_">runInAction</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>        fetchedTodos.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">json</span>) =&gt;</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">updateTodoFromServer</span>(json));<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-property">isLoading</span> = <span class="hljs-literal">false</span>;<br>      &#125;);<br>    &#125;);<br>  &#125;<br><br>  <span class="hljs-comment">// 用来自服务器的信息更新一个 Todo。保证一个 Todo 只存在一次</span><br>  <span class="hljs-comment">// 可以构建一个新的 Todo，更新一个现有的 Todo</span><br>  <span class="hljs-comment">// 如果一个 Todo 在服务器上被删除，则删除该 Todo</span><br>  <span class="hljs-title function_">updateTodoFromServer</span>(<span class="hljs-params">json</span>) &#123;<br>    <span class="hljs-keyword">let</span> todo = <span class="hljs-variable language_">this</span>.<span class="hljs-property">todos</span>.<span class="hljs-title function_">find</span>(<span class="hljs-function">(<span class="hljs-params">todo</span>) =&gt;</span> todo.<span class="hljs-property">id</span> === json.<span class="hljs-property">id</span>);<br>    <span class="hljs-keyword">if</span> (!todo) &#123;<br>      todo = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Todo</span>(<span class="hljs-variable language_">this</span>, json.<span class="hljs-property">id</span>);<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">todos</span>.<span class="hljs-title function_">push</span>(todo);<br>    &#125;<br>    <span class="hljs-keyword">if</span> (json.<span class="hljs-property">isDeleted</span>) &#123;<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">removeTodo</span>(todo);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      todo.<span class="hljs-title function_">updateFromJson</span>(json);<br>    &#125;<br>  &#125;<br><br>  <span class="hljs-comment">// 在客户端和服务器上创建一个新的 Todo</span><br>  <span class="hljs-title function_">createTodo</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">const</span> todo = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Todo</span>(<span class="hljs-variable language_">this</span>);<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">todos</span>.<span class="hljs-title function_">push</span>(todo);<br>    <span class="hljs-keyword">return</span> todo;<br>  &#125;<br><br>  <span class="hljs-comment">// 一个 Todo 被删除了，就从客户端内存中清除掉</span><br>  <span class="hljs-title function_">removeTodo</span>(<span class="hljs-params">todo</span>) &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">todos</span>.<span class="hljs-title function_">splice</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">todos</span>.<span class="hljs-title function_">indexOf</span>(todo), <span class="hljs-number">1</span>);<br>    todo.<span class="hljs-title function_">dispose</span>();<br>  &#125;<br>&#125;<br><br><span class="hljs-comment">// Todo 的领域对象</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Todo</span> &#123;<br>  id = <span class="hljs-literal">null</span>; <span class="hljs-comment">// todo 的唯一 id, 不可改变（immutable）。</span><br>  completed = <span class="hljs-literal">false</span>;<br>  task = <span class="hljs-string">&quot;&quot;</span>;<br>  author = <span class="hljs-literal">null</span>; <span class="hljs-comment">// 引用一个 author 对象 (来自 authorStore)</span><br>  store = <span class="hljs-literal">null</span>;<br>  autoSave = <span class="hljs-literal">true</span>; <span class="hljs-comment">// 指示此对象的更改是否应提交到服务器</span><br>  saveHandler = <span class="hljs-literal">null</span>; <span class="hljs-comment">// 为自动保存 Todo 的副作用提供的清理方法 (dispose)</span><br><br>  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">store, id = uuid.v4()</span>) &#123;<br>    <span class="hljs-title function_">makeAutoObservable</span>(<span class="hljs-variable language_">this</span>, &#123;<br>      <span class="hljs-attr">id</span>: <span class="hljs-literal">false</span>,<br>      <span class="hljs-attr">store</span>: <span class="hljs-literal">false</span>,<br>      <span class="hljs-attr">autoSave</span>: <span class="hljs-literal">false</span>,<br>      <span class="hljs-attr">saveHandler</span>: <span class="hljs-literal">false</span>,<br>      <span class="hljs-attr">dispose</span>: <span class="hljs-literal">false</span>,<br>    &#125;);<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">store</span> = store;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">id</span> = id;<br><br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">saveHandler</span> = <span class="hljs-title function_">reaction</span>(<br>      <span class="hljs-function">() =&gt;</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">asJson</span>, <span class="hljs-comment">// 观察在 JSON 中使用了的任何东西:</span><br>      <span class="hljs-function">(<span class="hljs-params">json</span>) =&gt;</span> &#123;<br>        <span class="hljs-comment">// 如果 autoSave 为 true, 把 json 发送到服务端</span><br>        <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">autoSave</span>) &#123;<br>          <span class="hljs-variable language_">this</span>.<span class="hljs-property">store</span>.<span class="hljs-property">transportLayer</span>.<span class="hljs-title function_">saveTodo</span>(json);<br>        &#125;<br>      &#125;<br>    );<br>  &#125;<br><br>  <span class="hljs-comment">// 在客户端和服务端中删除此 Todo</span><br>  <span class="hljs-title function_">delete</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">store</span>.<span class="hljs-property">transportLayer</span>.<span class="hljs-title function_">deleteTodo</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">id</span>);<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">store</span>.<span class="hljs-title function_">removeTodo</span>(<span class="hljs-variable language_">this</span>);<br>  &#125;<br><br>  <span class="hljs-keyword">get</span> <span class="hljs-title function_">asJson</span>() &#123;<br>    <span class="hljs-keyword">return</span> &#123;<br>      <span class="hljs-attr">id</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">id</span>,<br>      <span class="hljs-attr">completed</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">completed</span>,<br>      <span class="hljs-attr">task</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">task</span>,<br>      <span class="hljs-attr">authorId</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">author</span> ? <span class="hljs-variable language_">this</span>.<span class="hljs-property">author</span>.<span class="hljs-property">id</span> : <span class="hljs-literal">null</span>,<br>    &#125;;<br>  &#125;<br><br>  <span class="hljs-comment">// 使用服务端信息更新此 Todo</span><br>  <span class="hljs-title function_">updateFromJson</span>(<span class="hljs-params">json</span>) &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">autoSave</span> = <span class="hljs-literal">false</span>; <span class="hljs-comment">// 确保变更不会保存到服务器</span><br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">completed</span> = json.<span class="hljs-property">completed</span>;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">task</span> = json.<span class="hljs-property">task</span>;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">author</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">store</span>.<span class="hljs-property">authorStore</span>.<span class="hljs-title function_">resolveAuthor</span>(json.<span class="hljs-property">authorId</span>);<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">autoSave</span> = <span class="hljs-literal">true</span>;<br>  &#125;<br><br>  <span class="hljs-comment">// 清理 observer</span><br>  <span class="hljs-title function_">dispose</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">saveHandler</span>();<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="UI-stores"><a href="#UI-stores" class="headerlink" title="UI stores"></a>UI stores</h1><p>UI 状态 store 通常对应用来说非常具体，但一般也很简单。这类 store 通常没有太多的逻辑，但会存储大量关于 UI 的松散耦合的信息。 这一点很棒，因为大多数应用在开发过程中会经常改变 UI 状态。</p>
+<p>通常可以在 UI stores 中找到:</p>
+<ul>
+<li>Session 信息</li>
+<li>应用加载阶段的信息</li>
+<li><strong>不会存储到后端的信息</strong></li>
+<li>影响全局 UI 的信息</li>
+<li>Window 尺寸</li>
+<li>可访问性信息</li>
+<li>当前语言</li>
+<li>当前主题</li>
+<li><strong>会影响多个无关组件的界面状态：</strong></li>
+<li>当前选中项</li>
+<li>工具栏可见性等等</li>
+<li>向导的状态</li>
+<li>全局遮罩层的状态</li>
+</ul>
+<p>对于同构应用，你可能还想为 store 提供一个默认值，以便组件能正常渲染。 你可以通过 React context 把 UI 状态 store 在应用中传递下去。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> &#123; makeAutoObservable, observable, computed, asStructure &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;mobx&quot;</span>;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UiState</span> &#123;<br>  language = <span class="hljs-string">&quot;en_US&quot;</span>;<br>  pendingRequestCount = <span class="hljs-number">0</span>;<br><br>  <span class="hljs-comment">// .struct 确保对象只有以 deepEqual 的方式更新时，才会触发 observer</span><br>  windowDimensions = &#123;<br>    <span class="hljs-attr">width</span>: <span class="hljs-variable language_">window</span>.<span class="hljs-property">innerWidth</span>,<br>    <span class="hljs-attr">height</span>: <span class="hljs-variable language_">window</span>.<span class="hljs-property">innerHeight</span>,<br>  &#125;;<br><br>  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-title function_">makeAutoObservable</span>(<span class="hljs-variable language_">this</span>, &#123; <span class="hljs-attr">windowDimensions</span>: observable.<span class="hljs-property">struct</span> &#125;);<br>    <span class="hljs-variable language_">window</span>.<span class="hljs-property">onresize</span> = <span class="hljs-function">() =&gt;</span> &#123;<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">windowDimensions</span> = <span class="hljs-title function_">getWindowDimensions</span>();<br>    &#125;;<br>  &#125;<br><br>  <span class="hljs-keyword">get</span> <span class="hljs-title function_">appIsInSync</span>() &#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">pendingRequestCount</span> === <span class="hljs-number">0</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="组合多个-stores"><a href="#组合多个-stores" class="headerlink" title="组合多个 stores"></a>组合多个 stores</h1><p>一个经常被问到的问题是：如何在不使用单例的情况下组合多个 stores，stores 之间如何相互通信？</p>
+<p>创建一个 RootStore 是解决这个问题的有效模式：把所有 stores 实例化，并共享引用。这种模式的优点如下：</p>
+<ul>
+<li>易于设置</li>
+<li>支持强类型</li>
+<li>因为只需要实例化一个 root store，复杂的单元测试会变得简单一点</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">RootStore</span> &#123;<br>  <span class="hljs-title function_">constructor</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">userStore</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">UserStore</span>(<span class="hljs-variable language_">this</span>);<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">todoStore</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">TodoStore</span>(<span class="hljs-variable language_">this</span>);<br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">UserStore</span> &#123;<br>  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">rootStore</span>) &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">rootStore</span> = rootStore;<br>  &#125;<br><br>  <span class="hljs-title function_">getTodos</span>(<span class="hljs-params">user</span>) &#123;<br>    <span class="hljs-comment">// 通过 root store 来访问 todoStore</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">rootStore</span>.<span class="hljs-property">todoStore</span>.<span class="hljs-property">todos</span>.<span class="hljs-title function_">filter</span>(<br>      <span class="hljs-function">(<span class="hljs-params">todo</span>) =&gt;</span> todo.<span class="hljs-property">author</span> === user<br>    );<br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TodoStore</span> &#123;<br>  todos = [];<br>  rootStore;<br><br>  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">rootStore</span>) &#123;<br>    <span class="hljs-title function_">makeAutoObservable</span>(<span class="hljs-variable language_">this</span>, &#123; <span class="hljs-attr">rootStore</span>: <span class="hljs-literal">false</span> &#125;);<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">rootStore</span> = rootStore;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>使用 React 时，root store 一般通过 React context 插入到组件树中。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/mobx/">#mobx</a>
+      
+        <a href="/tags/mobx-store/">#mobx-store</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>mobx-如何定义store-最佳实践</div>
+      <div>http://example.com/2022/10/11/mobx-如何定义store-最佳实践/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>John Doe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>October 11, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/10/13/mobx-%E7%90%86%E8%A7%A3%E5%93%8D%E5%BA%94%E6%80%A7/" title="mobx-理解响应性">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">mobx-理解响应性</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/10/10/mobx%E4%BC%98%E5%8C%96React%E6%B8%B2%E6%9F%93/" title="mobx优化React渲染">
+                        <span class="hidden-mobile">mobx优化React渲染</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
